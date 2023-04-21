@@ -2,8 +2,12 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Config" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Core" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Data" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Layout" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Util" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/venvconversorfrotas/Validations" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venvconversorfrotas" />
     </content>
     <orderEntry type="inheritedJdk" />
