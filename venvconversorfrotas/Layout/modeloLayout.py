@@ -14,7 +14,7 @@ class ModeloLayout:
     def columns_not_null_get(self):
         id_bem = ModeloLayout()
         id = id_bem.id_name_get()
-        return ['IDPARAMETERSYSTEM', 'NMPARAMETERSYSTEM', 'CODENTIDADE', 'IDMARCA', 'NMMARCA', 'IDESPECIE', 'NMESPECIE', 'IDMODELO', 'IDMARCA', 'NMMODELO', 'IDESPECIE']
+        return ['IDMODELO', 'IDMARCA', 'NMMODELO', 'IDESPECIE']
 
     def columns_get(self):
-        return ['VLPARAMETERSYSTEM', 'TPESPECIEACUMULADOR', 'IDCATEGORIACNH', 'TPVEICULOTCE', 'TPNATUREZABENS', 'TPCOMBUSTIVELTCE'] 
+        return ['TPCOMBUSTIVELTCE'] 

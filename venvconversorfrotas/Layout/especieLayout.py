@@ -14,7 +14,7 @@ class EspecieLayout:
     def columns_not_null_get(self):
         id_bem = EspecieLayout()
         id = id_bem.id_name_get()
-        return ['IDPARAMETERSYSTEM', 'NMPARAMETERSYSTEM', 'CODENTIDADE', 'IDMARCA', 'NMMARCA', 'IDESPECIE', 'NMESPECIE']
+        return ['IDESPECIE', 'NMESPECIE']
 
     def columns_get(self):
-        return ['VLPARAMETERSYSTEM', 'TPESPECIEACUMULADOR', 'IDCATEGORIACNH', 'TPVEICULOTCE', 'TPNATUREZABENS'] 
+        return ['TPESPECIEACUMULADOR', 'IDCATEGORIACNH', 'TPVEICULOTCE', 'TPNATUREZABENS'] 

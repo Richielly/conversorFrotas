@@ -30,6 +30,7 @@ class ValidationData:
         id_name = ValidationData().search_id_name(str(table))
         global script_all
         query = script_all.replace('*', f'max({str(id_name).strip()})').replace('table', f'{table}')
+        id_name = ''
         cursor = ConectBd().connection()
         cursor.execute(query)
         result = cursor.fetchone()
@@ -47,10 +48,11 @@ class ValidationData:
                 step +=1
         script_all = script_all + ' where ' + new_where
         script_all = script_all.replace('table', f'{table}')
-        print(script_all)
         cursor = ConectBd().connection()
         cursor.execute(script_all)
         result = cursor.fetchone()
+        cursor.close()
+        cursor.connection.close()
         return result
     
     def table_description(self, table):
@@ -122,6 +124,8 @@ class ValidationData:
         cursor = ConectBd().connection()
         cursor.execute(query)
         result = cursor.fetchall()
+        cursor.close()
+        cursor.connection.close()
         return result
 
     def return_constraint_table(self, table):
@@ -145,6 +149,8 @@ class ValidationData:
         for i in result:
             constrant.append(clear.remove_spaces(i[0]))
 
+        cursor.close()
+        cursor.connection.close()
         return constrant
 
     def search_id_name (self, table):
@@ -158,6 +164,8 @@ class ValidationData:
         cursor = ConectBd().connection()
         cursor.execute(query)
         result  = cursor.fetchone()
+        cursor.close()
+        cursor.connection.close()
         return result[0]
     
     def return_id(self, table):
@@ -167,6 +175,8 @@ class ValidationData:
         cursor = ConectBd().connection()
         cursor.execute(query)
         result = cursor.fetchone()
+        cursor.close()
+        cursor.connection.close()
         return result[0]
 
     def insert_data(self, table, columns, values):

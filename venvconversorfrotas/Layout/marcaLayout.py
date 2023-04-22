@@ -14,7 +14,7 @@ class MarcaLayout:
     def columns_not_null_get(self):
         id_bem = MarcaLayout()
         id = id_bem.id_name_get()
-        return ['IDPARAMETERSYSTEM', 'NMPARAMETERSYSTEM', 'CODENTIDADE', 'IDMARCA', 'NMMARCA']
+        return ['IDMARCA', 'NMMARCA']
 
     def columns_get(self):
-        return ['VLPARAMETERSYSTEM'] 
+        return [] 

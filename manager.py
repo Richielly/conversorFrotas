@@ -12,16 +12,19 @@ utl = util.Util()
 # file_name = core.step['Produto']
 # table = file_name[2]
 content = content['layout']
-columns=[]
-columns_not_null=[]
+
 def columns_not_null_list(table):
+    valid.table_description(table)
+    columns_not_null = []
     for col in valid.table_description(table):
         if utl.remove_spaces(col[4]) == 'YES':
             columns_not_null.append(utl.remove_spaces(col[0]))
     list_columns_not_null = utl.remove_itens_in_list(columns_not_null,['OPERADORCRIADOR', 'DATACRIACAO', 'OPERADORATUALIZADOR', 'DATAATUALIZACAO'])
+
     return list_columns_not_null
 
 def columns_list(table):
+    columns = []
     for col in valid.table_description(table):
         if utl.remove_spaces(col[4]) == 'NO':
             columns.append(utl.remove_spaces(col[0]))
@@ -41,5 +44,5 @@ def factory():
             struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])))
             struct.replace_content_file_py(file_py_dir, '##columnsNotNull##', str(columns_not_null_list(table)))
             struct.replace_content_file_py(file_py_dir, '##columns##', str(columns_list(table)))
-
+            file_name.clear()
 factory()

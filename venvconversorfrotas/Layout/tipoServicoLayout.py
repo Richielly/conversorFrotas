@@ -14,7 +14,7 @@ class TipoServicoLayout:
     def columns_not_null_get(self):
         id_bem = TipoServicoLayout()
         id = id_bem.id_name_get()
-        return ['IDPARAMETERSYSTEM', 'NMPARAMETERSYSTEM', 'CODENTIDADE', 'IDMARCA', 'NMMARCA', 'IDESPECIE', 'NMESPECIE', 'IDMODELO', 'IDMARCA', 'NMMODELO', 'IDESPECIE', 'IDTIPOSERVICO', 'NMTIPOSERVICO', 'TPAGENDAMENTOSERVICO']
+        return ['IDTIPOSERVICO', 'NMTIPOSERVICO', 'TPAGENDAMENTOSERVICO']
 
     def columns_get(self):
-        return ['VLPARAMETERSYSTEM', 'TPESPECIEACUMULADOR', 'IDCATEGORIACNH', 'TPVEICULOTCE', 'TPNATUREZABENS', 'TPCOMBUSTIVELTCE'] 
+        return [] 
