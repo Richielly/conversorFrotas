@@ -7,8 +7,10 @@ struct = base.Base()
 core = core.Core()
 valid = validationData.ValidationData()
 content = contentBase.contentBase
+contentData = contentBase.contentBase
 utl = util.Util()
 content = content['layout']
+contentData = contentData['layoutData']
 
 def columns_not_null_list(table):
     valid.table_description(table)
@@ -33,8 +35,7 @@ def factoryLayout():
     for layout in core.step:
         file_name = core.step[f'{layout}']
         table = core.step[f'{layout}'][2]
-        file_py_dir = struct.create_file_py(file_name=file_name[1], content=content)
-        print(file_name)
+        file_py_dir = struct.create_file_py('Layout', file_name=file_name[1], content=content)
         if file_py_dir != False:
             struct.replace_content_file_py(file_py_dir, '##NomeArquivoTabela##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##NomeTabela##', file_name[2])
@@ -44,5 +45,17 @@ def factoryLayout():
             file_name.clear()
 
 def factoryLayoutData():
-    pass
-factoryLayout()
+    for layoutData in core.step:
+        file_name = core.step[f'{layoutData}']
+        print(file_name)
+        table = core.step[f'{layoutData}'][2]
+        print(table)
+        file_py_dir = struct.create_file_py('LayoutData', file_name=file_name[1]+'Data', content=contentData)
+
+        if file_py_dir != False:
+            struct.replace_content_file_py(file_py_dir, '##layout_py##', file_name[1])
+            struct.replace_content_file_py(file_py_dir, '##layout_class##', file_name[0])
+            struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
+
+
+factoryLayoutData()

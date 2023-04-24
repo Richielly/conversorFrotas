@@ -8,7 +8,9 @@ class Base:
         else:
             return dir_name
 
-    def create_file_py(self, dir=r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\venvconversorfrotas\Layout', file_name='default', content=''):
+    def create_file_py(self, path_dir, file_name='default', content=''):
+
+        dir = f'C:\\Users\Equiplano\PycharmProjects\conversorFrotas\\venvconversorfrotas\\{path_dir}'
 
         if not os.path.exists(dir):
             os.makedirs(dir)

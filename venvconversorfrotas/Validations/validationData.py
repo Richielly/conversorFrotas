@@ -36,20 +36,25 @@ class ValidationData:
         result = cursor.fetchone()
         return result[0] + 1
 
-    def exist (self, table, *values, constraint, upper=False):
-        global script_all
+    def exist (self, table, values, constraint, upper=False):
+        script_all = 'select * from table'
         step = 0
         new_where = ''
         where = dict(zip(constraint, values))
         for constr, val in where.items():
             if upper:
-                new_where += f" {constr} = upper('{val}') "
+                new_where += f" upper({constr}) = upper('{val}') "
                 if step < len(where)-1:
                     new_where += ' and'
                     step +=1
+            else:
+                new_where += f" {constr} = '{val}' "
+                if step < len(where) - 1:
+                    new_where += ' and'
+                    step += 1
             script_all = script_all + ' where ' + new_where
-        print(script_all)
         script_all = script_all.replace('table', f'{table}')
+        # print(script_all)
         cursor = ConectBd().connection()
         cursor.execute(script_all)
         result = cursor.fetchone()
@@ -180,10 +185,11 @@ class ValidationData:
         cursor.connection.close()
         return result[0]
 
-    def insert_data(self, table, columns, *values):
-
+    def insert_data(self, table, columns, values):
+        id_table = ValidationData().last_id(table)
         value_log_default = ValidationData().default_log()
         values = values + value_log_default
+        values.insert(0,id_table)
         columns_str = ', '.join(columns)
         placeholders = ', '.join(['?' for _ in values])
         query = f"INSERT INTO {table} ({columns_str}{colum_log_default}) VALUES ({placeholders})"
@@ -192,9 +198,11 @@ class ValidationData:
             cursor.execute(query, values)
             cursor.connection.commit()
             print("Dados inseridos com sucesso.")
+            return True
         except Exception as e:
             cursor.connection.rollback()
             print(f"Ocorreu um erro ao inserir os dados: {e}")
+            return False
         finally:
             cursor.close()
             cursor.connection.close()

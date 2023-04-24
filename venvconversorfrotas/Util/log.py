@@ -3,7 +3,7 @@ import configparser
 from Util.base import Base as base
 
 cfg = configparser.ConfigParser()
-cfg.read('cfg.ini')
+cfg.read(r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
 class Log:
 
     def log(self, msg, filename='log', level=logging.INFO):

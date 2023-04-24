@@ -3,7 +3,7 @@ import configparser
 import fdb
 
 cfg = configparser.ConfigParser()
-cfg.read('cfg.ini')
+cfg.read(r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
 
 class ConectBd:
 

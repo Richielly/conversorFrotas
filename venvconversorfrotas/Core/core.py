@@ -7,7 +7,7 @@ class Core:
             'Cor': ['Cor', 'corLayout', 'COR', 'cor.txt'],
             # 'Marca' : ['Marca','marcaLayout','MARCA'],
             # 'Especie' : ['Especie','especieLayout','SCF_ESPECIE'],
-            # 'Modelo' : ['Modelo','modeloLayout','SCF_MODELO'],
+            'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
             # 'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO'],
             # 'Pessoa' : ['Pessoa','pessoaLayout','PESSOA'],
             # 'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA'],
