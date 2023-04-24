@@ -19,5 +19,7 @@ class ##NomeArquivoTabela##Layout:
         return ##columnsNotNull##
 
     def columns_get(self):
-        return ##columns## """
+        return ##columns## """,
+
+    'layoutData' : """  """
 }

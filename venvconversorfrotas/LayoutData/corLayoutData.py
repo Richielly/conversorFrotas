@@ -1,5 +1,7 @@
 import configparser
 import logging
+import pandas as pd
+
 import core
 from Validations import validationData
 from Layout import corLayout
@@ -7,19 +9,17 @@ from Util import log, util
 import pandas as pd
 
 cfg = configparser.ConfigParser()
-cfg.read('cfg.ini')
+cfg.read(r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
+
 path_dir = cfg['DEFAULT']['DiretorioArquivos']
+
 _util = util.Util()
 _core = core.Core
 _validation = validationData.ValidationData()
 _layout = corLayout.CorLayout()
 _log = log.Log()
+_path_file = path_dir + _core.step['Cor'][3]
 class CorLayoutData:
-
-    path_data = path_dir + _core.step['Cor'][3]
-
-    import pandas as pd
-
     def __int__(self):
         self.table_name = _layout.table_name()
         self.next_id = _validation.last_id(self.table_name)
@@ -38,9 +38,7 @@ class CorLayoutData:
     def save_data(self, values):
         _validation.insert_data(self.table_name, self.columns, values)
 
-arquivo = path_dir + "Cor.txt"
-chunksize = 1
 
-for chunk in pd.read_csv(arquivo, chunksize=chunksize, header=None):
-    print(str(chunk.values[0][0]).split('|')[0])
+for line in pd.read_csv(_path_file, chunksize=1, header=None):
+    print(str(line.values[0][0]).split('|')[0])
 

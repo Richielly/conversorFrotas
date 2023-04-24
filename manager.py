@@ -8,9 +8,6 @@ core = core.Core()
 valid = validationData.ValidationData()
 content = contentBase.contentBase
 utl = util.Util()
-
-# file_name = core.step['Produto']
-# table = file_name[2]
 content = content['layout']
 
 def columns_not_null_list(table):
@@ -32,7 +29,7 @@ def columns_list(table):
     list_columns = utl.remove_itens_in_list(columns,['OPERADORCRIADOR', 'DATACRIACAO', 'OPERADORATUALIZADOR', 'DATAATUALIZACAO'])
     return list_columns
 
-def factory():
+def factoryLayout():
     for layout in core.step:
         file_name = core.step[f'{layout}']
         table = core.step[f'{layout}'][2]
@@ -45,4 +42,7 @@ def factory():
             struct.replace_content_file_py(file_py_dir, '##columnsNotNull##', str(columns_not_null_list(table)))
             struct.replace_content_file_py(file_py_dir, '##columns##', str(columns_list(table)))
             file_name.clear()
-factory()
+
+def factoryLayoutData():
+    pass
+factoryLayout()

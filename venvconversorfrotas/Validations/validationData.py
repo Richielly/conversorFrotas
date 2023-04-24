@@ -36,17 +36,19 @@ class ValidationData:
         result = cursor.fetchone()
         return result[0] + 1
 
-    def exist (self, table, values, constraint):
+    def exist (self, table, *values, constraint, upper=False):
         global script_all
         step = 0
         new_where = ''
         where = dict(zip(constraint, values))
         for constr, val in where.items():
-            new_where += f" {constr} = '{val}' "
-            if step < len(where)-1:
-                new_where += ' and'
-                step +=1
-        script_all = script_all + ' where ' + new_where
+            if upper:
+                new_where += f" {constr} = upper('{val}') "
+                if step < len(where)-1:
+                    new_where += ' and'
+                    step +=1
+            script_all = script_all + ' where ' + new_where
+        print(script_all)
         script_all = script_all.replace('table', f'{table}')
         cursor = ConectBd().connection()
         cursor.execute(script_all)
@@ -148,7 +150,6 @@ class ValidationData:
 
         for i in result:
             constrant.append(clear.remove_spaces(i[0]))
-
         cursor.close()
         cursor.connection.close()
         return constrant
@@ -179,7 +180,7 @@ class ValidationData:
         cursor.connection.close()
         return result[0]
 
-    def insert_data(self, table, columns, values):
+    def insert_data(self, table, columns, *values):
 
         value_log_default = ValidationData().default_log()
         values = values + value_log_default

@@ -48,5 +48,9 @@ class Util:
     def set_current_seconds(self, datetime):
         current_seconds = datetime.now().second
         return dt.replace(second=current_seconds)
-    
-    
+
+    def read_file(self, file_name):
+        with open(file_name, 'r') as f:
+            content = f.read()
+        return content
+
