@@ -31,6 +31,11 @@ def columns_list(table):
     list_columns = utl.remove_itens_in_list(columns,['OPERADORCRIADOR', 'DATACRIACAO', 'OPERADORATUALIZADOR', 'DATAATUALIZACAO'])
     return list_columns
 
+def constrant_list(table):
+    constrant = []
+    constrant = valid.return_constraint_table(table)
+    return constrant
+
 def factoryLayout():
     for layout in core.step:
         file_name = core.step[f'{layout}']
@@ -47,15 +52,21 @@ def factoryLayout():
 def factoryLayoutData():
     for layoutData in core.step:
         file_name = core.step[f'{layoutData}']
-        print(file_name)
         table = core.step[f'{layoutData}'][2]
-        print(table)
         file_py_dir = struct.create_file_py('LayoutData', file_name=file_name[1]+'Data', content=contentData)
 
         if file_py_dir != False:
+            columns = columns_not_null_list(table) + columns_list(table) + valid.log_simples()
+            where = valid.return_constraint_table(file_name[2])
+            where = tuple(where)
+            where = valid.factory_where(where)
+            exists = valid.factory_exists(table,where)
+            print(exists)
             struct.replace_content_file_py(file_py_dir, '##layout_py##', file_name[1])
             struct.replace_content_file_py(file_py_dir, '##layout_class##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
+            struct.replace_content_file_py(file_py_dir, '##insert_into##', valid.factory_into(table, tuple(columns)))
+            struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
 
-
+# factoryLayout()
 factoryLayoutData()

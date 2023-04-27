@@ -20,19 +20,22 @@ class ##NomeArquivoTabela##Layout:
 
     def columns_get(self):
         return ##columns## """,
-'layoutData' : """import configparser
+
+'layoutData': """import configparser
 import logging
 import pandas as pd
 import core
+from Data.conectBd import ConectBd
 from Validations import validationData
 from Layout import ##layout_py##
-from Util import log, util
+from Util import log, util, typeConverter
 import pandas as pd
 
 cfg = configparser.ConfigParser()
 cfg.read(r'C:\\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
 path_dir = cfg['DEFAULT']['DiretorioArquivos']
 _util = util.Util()
+_converter = typeConverter.TypeConverter()
 _core = core.Core
 _validation = validationData.ValidationData()
 _layout = ##layout_py##.##layout_class##Layout()
@@ -44,23 +47,59 @@ next_id = _validation.last_id(table_name)
 constrant = _layout.table_constraint()
 column = _layout.columns_get()
 column_not_null = _layout.columns_not_null_get()
-columns = column + column_not_null
+columns = column_not_null + column
 
 class ##StepKey##LayoutData:
 
-    def save_data(self, table_name, values, constrant, line):
-        if (_validation.exist(table_name, values, constrant, True)) == None:
-            _validation.insert_data(table_name, columns, values)
-            _log.log(f'Linha {line}: ##Msg## foi gravada com sucesso.', filename=table_name, level=logging.INFO)
-            return True
-        else:
-            _log.log(f'Linha {line}: ##Msg##, já esta gravada.', filename=table_name, level=logging.WARN)
-            return False
+    def valid(self):
+        pass
 
+    def entity(self):
+        _entity = []
+        _entity.append(_converter.to_string('#'))
+        _entity.append(_converter.to_integer('#'))
+
+        return _entity
+
+    def exist(self, table, *args):
+        cursor = ConectBd().connection()
+        script = f"##select_exist##"
+        cursor.execute(script)
+        result = cursor.fetchone()
+        cursor.close()
+        cursor.connection.close()
+        return result
+
+    def insert_data(self, values):
+        id = _validation.last_id(table_name)
+        values.insert(0,id)
+        query = "##insert_into##"
+        cursor.execute(query)
+        cursor.close()
+        cursor.connection.close()
+
+    def save_data(self, table_name, values, line):
+        _validation.insert_data(table_name, columns, [values])
+        _log.log(f'Linha {line}: ##Msg## foi gravada com sucesso.', filename=table_name, level=logging.INFO)
+        return True
+###################Tirar do Layout padrão #######################
 for line in pd.read_csv(_path_file, chunksize=1, header=None):
     line_index = line.index.stop #identificação da linha no arquivo
     values = line.values[0][0].split('|')
-    ##campo## = values[0]
-    _instanceLayoutData = ##layout_class##LayoutData()
-    _instanceLayoutData.save_data(table_name, [##campo##], constrant, line_index) """
+    nmEspecie = values[0]
+    tpEspecieAcumulador = values[1]
+    tpCategoriaCnh = values[2]
+    tpVeiculoTce = values[4]
+    tpNaturezaBens = values[5]
+
+    idCategoriaCnh = categoriaCnhLayoutData.CategoriaCnhLayoutData()
+    idCategoriaCnh = idCategoriaCnh.search_id(table_name, tpCategoriaCnh)
+
+    _instanceLayoutData = EspecieLayoutData()
+
+    _instanceLayoutData.insert_data(values)
+
+    # if _instanceLayoutData.exist(table_name, nmEspecie) == None:
+    #     _instanceLayoutData.save_data(table_name, nmEspecie, line_index)
+ """
 }

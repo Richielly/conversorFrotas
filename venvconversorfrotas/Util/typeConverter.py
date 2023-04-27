@@ -6,7 +6,7 @@ class TypeConverter:
         return str(value)
 
     def to_integer(self, value):
-        return int(valor, value)
+        return int(value)
 
     def to_float(self, value):
         return float(value)

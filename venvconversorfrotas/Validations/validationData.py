@@ -12,13 +12,13 @@ script_all = 'select * from table'
 class ValidationData:
 
     def operador(self):
-
         cursor = ConectBd().connection()
         id_operador = cursor.execute( f""" select idoperador from OPERADOR where login = 'esmaster' """ )
         return id_operador.fetchone()[0]
 
+    def log_simples(self):
+        return ['operadorcriador', 'datacriacao', 'operadoratualizador', 'dataatualizacao']
     def default_log(self):
-
         operador = ValidationData().operador() #criar função para incluir operador no arquivo de configuração.
         data_criacao = datetime.now()
         data_atualizacao = datetime.now()
@@ -26,7 +26,6 @@ class ValidationData:
         return log_default
 
     def last_id(self, table):
-
         id_name = ValidationData().search_id_name(str(table))
         global script_all
         query = script_all.replace('*', f'max({str(id_name).strip()})').replace('table', f'{table}')
@@ -35,35 +34,8 @@ class ValidationData:
         cursor.execute(query)
         result = cursor.fetchone()
         return result[0] + 1
-
-    def exist (self, table, values, constraint, upper=False):
-        script_all = 'select * from table'
-        step = 0
-        new_where = ''
-        where = dict(zip(constraint, values))
-        for constr, val in where.items():
-            if upper:
-                new_where += f" upper({constr}) = upper('{val}') "
-                if step < len(where)-1:
-                    new_where += ' and'
-                    step +=1
-            else:
-                new_where += f" {constr} = '{val}' "
-                if step < len(where) - 1:
-                    new_where += ' and'
-                    step += 1
-            script_all = script_all + ' where ' + new_where
-        script_all = script_all.replace('table', f'{table}')
-        # print(script_all)
-        cursor = ConectBd().connection()
-        cursor.execute(script_all)
-        result = cursor.fetchone()
-        cursor.close()
-        cursor.connection.close()
-        return result
     
     def table_description(self, table):
-        
         query = f""" SELECT
         rf.RDB$FIELD_NAME AS column_name,
         CASE f.RDB$FIELD_TYPE
@@ -160,7 +132,6 @@ class ValidationData:
         return constrant
 
     def search_id_name (self, table):
-
         query = f"""SELECT r.RDB$FIELD_NAME AS id
                 FROM RDB$RELATION_CONSTRAINTS c
                 JOIN RDB$INDEX_SEGMENTS s ON c.RDB$INDEX_NAME = s.RDB$INDEX_NAME
@@ -173,36 +144,29 @@ class ValidationData:
         cursor.close()
         cursor.connection.close()
         return result[0]
-    
-    def return_id(self, table):
-        global script_all
-        id_name = ValidationData().search_id_name(str(table))
-        query = str(script_all).replace('*', f'{id_name}'.strip()).replace('table', f'{table}')
+
+    def query(self, query):
         cursor = ConectBd().connection()
         cursor.execute(query)
-        result = cursor.fetchone()
-        cursor.close()
-        cursor.connection.close()
-        return result[0]
+        rows = cursor.fetchall()
+        columns = [desc[0].lower() for desc in cursor.description]
+        return [dict(zip(columns, row)) for row in rows]
 
-    def insert_data(self, table, columns, values):
-        id_table = ValidationData().last_id(table)
-        value_log_default = ValidationData().default_log()
-        values = values + value_log_default
-        values.insert(0,id_table)
-        columns_str = ', '.join(columns)
-        placeholders = ', '.join(['?' for _ in values])
-        query = f"INSERT INTO {table} ({columns_str}{colum_log_default}) VALUES ({placeholders})"
-        try:
-            cursor = ConectBd().connection()
-            cursor.execute(query, values)
-            cursor.connection.commit()
-            print("Dados inseridos com sucesso.")
-            return True
-        except Exception as e:
-            cursor.connection.rollback()
-            print(f"Ocorreu um erro ao inserir os dados: {e}")
-            return False
-        finally:
-            cursor.close()
-            cursor.connection.close()
+    def factory_where(self, *args):
+        args = args[0]
+        step = 1
+        new_where = " where "
+        if len(args) != 0:
+            for where in args:
+                if step < len(args):
+                    new_where = new_where + where + f" = {where} and "
+                    step+=1
+                else:
+                    new_where = new_where + where + f" = {where} "
+                    step += 1
+        return new_where
+    def factory_exists(self, table, where):
+        query = f' select * from {table} {where}'
+        return query
+    def factory_into(self,table, *args):
+        return f""" insert into {table} {args[0]} values (values) """

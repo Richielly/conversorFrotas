@@ -15,7 +15,6 @@ class Base:
         if not os.path.exists(dir):
             os.makedirs(dir)
         file_path = os.path.join(dir, file_name+'.py')
-        print(file_path)
         if not os.path.exists(file_path):
             with open(file_path, 'w') as file:
                 file.write(content)
