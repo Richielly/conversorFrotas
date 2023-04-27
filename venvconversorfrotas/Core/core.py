@@ -1,7 +1,8 @@
 class Core:
 
     step = {
-            'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'bem.txt'],
+            'Pessoa': ['Pessoa', 'pessoaLayout', 'Pessoa', 'Pessoa.txt'],
+            'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
             # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
             'Cor': ['Cor', 'corLayout', 'COR', 'cor.txt'],
