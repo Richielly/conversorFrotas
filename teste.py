@@ -1,13 +1,7 @@
 from Core import imports
 
-_layoutCor = imports.layoutCor
-_layoutBem = imports.layoutBem
+_layoutModeloData = imports.layoutModeloData()
 
-bem =_layoutBem.table_constraint()
+teste = _layoutModeloData.valid
 
-bem_2 = _layoutBem.table_constraint()
-
-print(bem)
-print(bem_2)
-
-
+print(teste)

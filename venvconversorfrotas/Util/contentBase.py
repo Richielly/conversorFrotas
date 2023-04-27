@@ -61,7 +61,7 @@ class ##StepKey##LayoutData:
 
         return _entity
 
-    def exist(self, table, *args):
+    def exist(self, *args):
         cursor = ConectBd().connection()
         script = f"##select_exist##"
         cursor.execute(script)
@@ -82,24 +82,14 @@ class ##StepKey##LayoutData:
         _validation.insert_data(table_name, columns, [values])
         _log.log(f'Linha {line}: ##Msg## foi gravada com sucesso.', filename=table_name, level=logging.INFO)
         return True
-###################Tirar do Layout padrão #######################
+###################Tirar do Layout padrao #######################
 for line in pd.read_csv(_path_file, chunksize=1, header=None):
-    line_index = line.index.stop #identificação da linha no arquivo
+    line_index = line.index.stop #identificacao da linha no arquivo
     values = line.values[0][0].split('|')
     nmEspecie = values[0]
     tpEspecieAcumulador = values[1]
     tpCategoriaCnh = values[2]
     tpVeiculoTce = values[4]
-    tpNaturezaBens = values[5]
-
-    idCategoriaCnh = categoriaCnhLayoutData.CategoriaCnhLayoutData()
-    idCategoriaCnh = idCategoriaCnh.search_id(table_name, tpCategoriaCnh)
-
-    _instanceLayoutData = EspecieLayoutData()
-
-    _instanceLayoutData.insert_data(values)
-
-    # if _instanceLayoutData.exist(table_name, nmEspecie) == None:
-    #     _instanceLayoutData.save_data(table_name, nmEspecie, line_index)
+ 
  """
 }
