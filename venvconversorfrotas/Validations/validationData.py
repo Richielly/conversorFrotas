@@ -131,6 +131,42 @@ class ValidationData:
         cursor.connection.close()
         return constrant
 
+    def return_foreign_key(self, table):
+        clear = util.Util()
+        table = util.Util().to_uppercase(table)
+        table_foreign_key = []
+        colum_foreign_key = []
+        query = f""" SELECT
+                distinct
+                trim(ref_idx.RDB$RELATION_NAME) AS referenced_table,
+                trim(iseg.RDB$FIELD_NAME) AS foreign_key_field
+                FROM
+                RDB$RELATION_CONSTRAINTS rc
+                JOIN RDB$REF_CONSTRAINTS refc ON rc.RDB$CONSTRAINT_NAME = refc.RDB$CONSTRAINT_NAME
+                JOIN RDB$INDEX_SEGMENTS iseg ON rc.RDB$INDEX_NAME = iseg.RDB$INDEX_NAME
+                JOIN RDB$RELATION_CONSTRAINTS ref_rc ON refc.RDB$CONST_NAME_UQ = ref_rc.RDB$CONSTRAINT_NAME
+                JOIN RDB$INDEX_SEGMENTS ref_iseg ON ref_rc.RDB$INDEX_NAME = ref_iseg.RDB$INDEX_NAME
+                JOIN RDB$INDICES ref_idx ON ref_rc.RDB$INDEX_NAME = ref_idx.RDB$INDEX_NAME
+                WHERE
+                rc.RDB$RELATION_NAME = '{table}' AND rc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY'
+                ORDER BY
+                ref_idx.RDB$RELATION_NAME; """
+
+        cursor = ConectBd().connection()
+        cursor.execute(query)
+        result = cursor.fetchall()
+
+        dicionario = {}
+
+
+        for chave, valor in result:
+            if chave in dicionario:
+                dicionario[chave].append(valor)
+            else:
+                dicionario[chave] = [valor]
+        del dicionario['OPERADOR']
+        return dicionario
+
     def search_id_name (self, table):
         query = f"""SELECT r.RDB$FIELD_NAME AS id
                 FROM RDB$RELATION_CONSTRAINTS c
@@ -170,3 +206,7 @@ class ValidationData:
         return query
     def factory_into(self,table, *args):
         return f""" insert into {table} {args[0]} values (values) """
+
+
+teste = ValidationData()
+print(teste.return_foreign_key('scp55_bem'))
