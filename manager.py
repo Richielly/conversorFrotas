@@ -47,6 +47,7 @@ def factoryLayout():
             struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])))
             struct.replace_content_file_py(file_py_dir, '##columnsNotNull##', str(columns_not_null_list(table)))
             struct.replace_content_file_py(file_py_dir, '##columns##', str(columns_list(table)))
+            struct.replace_content_file_py(file_py_dir, '##foreingKey##', str(valid.return_foreign_key(table)))
             file_name.clear()
 
 def factoryLayoutData():
@@ -61,12 +62,12 @@ def factoryLayoutData():
             where = tuple(where)
             where = valid.factory_where(where)
             exists = valid.factory_exists(table,where)
-            print(exists)
             struct.replace_content_file_py(file_py_dir, '##layout_py##', file_name[1])
             struct.replace_content_file_py(file_py_dir, '##layout_class##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##insert_into##', valid.factory_into(table, tuple(columns)))
             struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
+            file_name.clear()
 
-# factoryLayout()
-factoryLayoutData()
+factoryLayout()
+# factoryLayoutData()
