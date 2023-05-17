@@ -164,7 +164,8 @@ class ValidationData:
                 dicionario[chave].append(valor)
             else:
                 dicionario[chave] = [valor]
-        del dicionario['OPERADOR']
+        if 'OPERADOR' in dicionario:
+            del dicionario['OPERADOR']
         return dicionario
 
     def search_id_name (self, table):
@@ -207,6 +208,3 @@ class ValidationData:
     def factory_into(self,table, *args):
         return f""" insert into {table} {args[0]} values (values) """
 
-
-teste = ValidationData()
-print(teste.return_foreign_key('scp55_bem'))

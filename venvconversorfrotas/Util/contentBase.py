@@ -11,7 +11,10 @@ class ##NomeArquivoTabela##Layout:
         return str(name).strip()
     
     def table_constraint(self):
-        return ##constraints## #Automatizar identificação de constraint
+        return ##constraints## 
+        
+    def table_foreing_key(self):
+        return ##foreingKey##
     
     def columns_not_null_get(self):
         id_bem = ##NomeArquivoTabela##Layout()

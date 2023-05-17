@@ -36,6 +36,13 @@ def constrant_list(table):
     constrant = valid.return_constraint_table(table)
     return constrant
 
+def fk_list(table):
+    fk = valid.return_foreign_key(table)
+    for chave, valor in fk.items():
+        for coluna in valor:
+            if coluna in columns_not_null_list(table):
+                print(chave, valor)
+
 def factoryLayout():
     for layout in core.step:
         file_name = core.step[f'{layout}']
@@ -67,7 +74,10 @@ def factoryLayoutData():
             struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##insert_into##', valid.factory_into(table, tuple(columns)))
             struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
+            # struct.replace_content_file_py(file_py_dir, '##valid##', fk_list(table))
             file_name.clear()
+            fk_list(table)
 
-factoryLayout()
-# factoryLayoutData()
+# factoryLayout()
+factoryLayoutData()
+
