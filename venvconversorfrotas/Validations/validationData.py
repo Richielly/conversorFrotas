@@ -18,11 +18,19 @@ class ValidationData:
 
     def log_simples(self):
         return ['operadorcriador', 'datacriacao', 'operadoratualizador', 'dataatualizacao']
+
     def default_log(self):
-        operador = ValidationData().operador() #criar função para incluir operador no arquivo de configuração.
+        operador = ValidationData().operador()  # Create a function to retrieve the operator from the configuration file.
         data_criacao = datetime.now()
         data_atualizacao = datetime.now()
-        log_default = [str(operador), data_criacao, str(operador), data_atualizacao]
+
+        log_default = {
+            'OPERADORCRIADOR': str(operador),
+            'DATACRIACAO': data_criacao,
+            'OPERADORATUALIZADOR': str(operador),
+            'DATAATUALIZACAO': data_atualizacao
+        }
+
         return log_default
 
     def last_id(self, table):
@@ -34,7 +42,25 @@ class ValidationData:
         cursor.execute(query)
         result = cursor.fetchone()
         return result[0] + 1
-    
+
+    def table_PK(self, table):
+        clear = util.Util()
+        primary_key = []
+        query = f""" SELECT RDB$INDEX_SEGMENTS.RDB$FIELD_NAME
+                    FROM RDB$INDICES
+                    JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDICES.RDB$INDEX_NAME
+                    JOIN RDB$INDEX_SEGMENTS ON RDB$INDEX_SEGMENTS.RDB$INDEX_NAME = RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME
+                    WHERE RDB$INDICES.RDB$RELATION_NAME = '{table}'
+                    AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY' """
+        cursor = ConectBd().connection()
+        cursor.execute(query)
+        result = cursor.fetchall()
+        for i in result:
+            primary_key.append(clear.remove_spaces(i[0]))
+        cursor.close()
+        cursor.connection.close()
+        return primary_key
+
     def table_description(self, table):
         query = f""" SELECT
         rf.RDB$FIELD_NAME AS column_name,
@@ -196,10 +222,10 @@ class ValidationData:
         if len(args) != 0:
             for where in args:
                 if step < len(args):
-                    new_where = new_where + where + f" = {where} and "
+                    new_where = new_where + where + f" = {{{where}}} and "
                     step+=1
                 else:
-                    new_where = new_where + where + f" = {where} "
+                    new_where = new_where + where + f" = {{{where}}} "
                     step += 1
         return new_where
     def factory_exists(self, table, where):

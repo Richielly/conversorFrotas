@@ -13,6 +13,11 @@ class Util:
                 list.remove(item)
         return list
 
+    def remove_chars(self, string, chars):
+
+        for char in chars:
+            string = string.replace(char, "")
+        return string
     def to_uppercase(self, text):
         return text.upper()
 
