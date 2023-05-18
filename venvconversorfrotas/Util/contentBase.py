@@ -62,7 +62,7 @@ class ##StepKey##LayoutData:
 
         return _entity
 
-    def exist(self, ##constraint##):
+    def exist(self, ##constraints##):
         try:
             global cursor
             script = f"##select_exist##"
@@ -115,8 +115,8 @@ class ##Class##LayoutReader:
     def check(self):
         global _entity_##class##
         global _entity_##class##_data
-        if _entity_##class##_data.exist(##constraint##):
-            log.log(f'A ##Class## com {##constraint##} já existe.', _entity_##class##.table_name(), logging.INFO)
+        if _entity_##class##_data.exist(##constraints##):
+            log.log(f'A ##Class## com {##constraints##} já existe.', _entity_##class##.table_name(), logging.INFO)
             return False
         return True
         

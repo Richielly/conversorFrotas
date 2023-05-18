@@ -20,7 +20,6 @@ def columns_not_null_list(table):
     for col in valid.table_description(table):
         if utl.remove_spaces(col[4]) == 'YES':
             columns_not_null.append(utl.remove_spaces(col[0]))
-    # list_columns_not_null = utl.remove_itens_in_list(columns_not_null,['OPERADORCRIADOR', 'DATACRIACAO', 'OPERADORATUALIZADOR', 'DATAATUALIZACAO'])
 
     return columns_not_null
 
@@ -29,8 +28,6 @@ def columns_list(table):
     for col in valid.table_description(table):
         if utl.remove_spaces(col[4]) == 'NO':
             columns.append(utl.remove_spaces(col[0]))
-
-    # list_columns = utl.remove_itens_in_list(columns,['OPERADORCRIADOR', 'DATACRIACAO', 'OPERADORATUALIZADOR', 'DATAATUALIZACAO'])
     return columns
 
 def constrant_list(table):
@@ -53,7 +50,6 @@ def factoryLayout():
         if file_py_dir != False:
             struct.replace_content_file_py(file_py_dir, '##NomeArquivoTabela##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##NomeTabela##', file_name[2])
-            # struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])))
             struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else str(valid.table_PK(table)))
             struct.replace_content_file_py(file_py_dir, '##columnsNotNull##', str(columns_not_null_list(table)))
             struct.replace_content_file_py(file_py_dir, '##columns##', str(columns_list(table)))
@@ -78,8 +74,8 @@ def factoryLayoutData():
             struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##insert_into##', table)
             struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
-            struct.replace_content_file_py(file_py_dir, '##*args##', utl.remove_chars(str(constrant_list(table)), ["[", "]", "'"]))
-            # struct.replace_content_file_py(file_py_dir, '##valid##', fk_list(table))
+            # struct.replace_content_file_py(file_py_dir, '##constraint##', utl.remove_chars(str(constrant_list(table)), ["[", "]", "'"]))
+            struct.replace_content_file_py(file_py_dir,'##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else utl.remove_chars(str(valid.table_PK(table)),["[", "]", "'"]))
             file_name.clear()
             fk_list(table)
 
@@ -93,8 +89,8 @@ def factoryLayoutReader():
             struct.replace_content_file_py(file_py_dir, '##layout##', file_name[1])
             struct.replace_content_file_py(file_py_dir, '##Class##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##class##', utl.to_lowercase(file_name[0]))
-            struct.replace_content_file_py(file_py_dir, '##constraint##', str(valid.return_constraint_table(file_name[2])))
+            struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else utl.remove_chars(str(valid.table_PK(table)),["[", "]", "'"]))
 
-factoryLayout()
+# factoryLayout()
 # factoryLayoutData()
-# factoryLayoutReader()
+factoryLayoutReader()
