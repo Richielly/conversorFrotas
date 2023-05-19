@@ -6,15 +6,21 @@ class TypeConverter:
         return str(value)
 
     def to_integer(self, value):
+        if value == '':
+            return None
         return int(value)
 
     def to_float(self, value):
+        if value == '':
+            return None
         return float(value)
 
     def to_bool(self, value):
         return bool(value)
 
     def string_to_datetime(self, string_data, format='%Y-%m-%d %H:%M:%S'):
+        if string_data == '':
+            return None
         return datetime.strptime(string_data, format)
 
     def datetime_to_string(self, datetime_data, format='%Y-%m-%d %H:%M:%S'):
