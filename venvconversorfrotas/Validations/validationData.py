@@ -63,8 +63,8 @@ class ValidationData:
 
     def table_description(self, table):
         query = f""" SELECT
-        rf.RDB$FIELD_NAME AS column_name,
-        CASE f.RDB$FIELD_TYPE
+        trim(rf.RDB$FIELD_NAME) AS column_name,
+        trim(CASE f.RDB$FIELD_TYPE
         WHEN 7 THEN 'SMALLINT'
         WHEN 8 THEN 'INTEGER'
         WHEN 10 THEN 'FLOAT'
@@ -79,9 +79,9 @@ class ValidationData:
         WHEN 45 THEN 'BLOB_ID'
         WHEN 261 THEN 'BLOB'
         ELSE 'UNKNOWN'
-        END AS field_type_name,
-        f.RDB$FIELD_LENGTH AS field_length,
-        CASE
+        END) AS field_type_name,
+        trim(f.RDB$FIELD_LENGTH) AS field_length,
+        trim(CASE
             WHEN EXISTS (
                 SELECT 1
                 FROM
@@ -94,11 +94,11 @@ class ValidationData:
                     AND rc.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY'
             ) THEN 'YES'
             ELSE 'NO'
-        END AS primary_key,
-        CASE
+        END) AS primary_key,
+        trim(CASE
             WHEN rf.RDB$NULL_FLAG = 1 THEN 'YES'
             ELSE 'NO'
-        END AS not_null
+        END) AS not_null
         FROM
             RDB$RELATION_FIELDS rf
         JOIN

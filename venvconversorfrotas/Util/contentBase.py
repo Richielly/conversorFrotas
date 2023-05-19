@@ -27,7 +27,6 @@ from Data import conectBd
 from Validations import validationData
 from Layout import ##layout_py##
 from Util import log, util, typeConverter
-import pandas as pd
 
 cfg = configparser.ConfigParser()
 cfg.read(r'C:\\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
@@ -58,9 +57,10 @@ class ##StepKey##LayoutData:
     def entity(self):
         global cursor
         cursor.execute(f"select * from {table_name}")
-        _entity = cursor.description
-
-        return _entity
+        row = cursor.fetchone()
+        columns = [desc[0] for desc in cursor.description]
+        entity = dict(zip(columns, row))
+        return entity
 
     def exist(self, ##constraints##):
         try:
@@ -102,25 +102,50 @@ class ##StepKey##LayoutData:
 from Core import imports
 from Layout import ##class##Layout
 from LayoutData import ##layout##Data
+
 _entity_##class## = ##class##Layout.##Class##Layout()
 _entity_##class##_data = ##class##LayoutData.##Class##LayoutData()
+_entity = _entity_##class##_data.entity()
+
 utl = imports.util
 msg = imports.messages
 log = imports.log
 class ##Class##LayoutReader:
 
     def ##class##_reader(self):
-        pass
+        global _entity
+
+        _entity = dict.fromkeys(_entity, None)
+        
+        _entity['coluna'] = None
+        _entity['coluna'] = None
+        
+        # _entity['CODGRUPO'] = 99
+        # _entity['CODSUBGRUPO'] = 9999
+        # _entity['CODCLASSE'] = 11
+        # _entity['NOME'] = 'Product Name'
+        # _entity['IDDERIVACAOPRODUTO'] = 1
+        # _entity['CODCLASSEFAMILIA'] = None
+        # _entity['TEMPODEHISTORICO'] = None
+        # _entity['TEMPOREPOSICAO'] = None
+        # _entity['PERCENTUALSEGURANCA'] = None
+        # _entity['DATASINC'] = None
+        
+        return _entity
       
     def check(self):
-        global _entity_##class##
-        global _entity_##class##_data
         if _entity_##class##_data.exist(##constraints##):
-            log.log(f'A ##Class## com {##constraints##} já existe.', _entity_##class##.table_name(), logging.INFO)
+            log.log(f"A ##Class## com {##constraints##} já existe.", _entity_##class##.table_name(), logging.INFO)
             return False
         return True
         
-teste = ClasseLayoutReader()
-print(teste.check())
+# teste = ClasseLayoutReader()
+# teste.classe_reader()
+# print(_entity)
+# if teste.check():
+#     _entity_classe_data.insert_data(_entity)
+
+# valid = imports.validation
+# print(valid.table_description(_entity_classe.table_name()))
 """
 }
