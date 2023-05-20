@@ -30,7 +30,7 @@ class Util:
     def to_title(self, text):
         return text.title()
 
-    def replace_substring(text, old, new):
+    def replace_substring(self,text, old, new):
         return text.replace(old, new)
 
     def complete_text(self, text, width, fillchar=' ', direction='left'):

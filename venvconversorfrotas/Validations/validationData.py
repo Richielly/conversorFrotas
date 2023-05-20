@@ -234,3 +234,11 @@ class ValidationData:
     def factory_into(self,table, *args):
         return f""" insert into {table} {args[0]} values (values) """
 
+    def factory_entity(self, table, *args):
+        entity = ""
+        for i, colum in enumerate(args[0], start=0):
+            entity = entity +'\n'+(f"        _entity['{colum[0]}']=_line[{i}]")
+        return entity
+
+# valid = ValidationData()
+# print(valid.factory_entity('CLASSE', valid.table_description('CLASSE')))

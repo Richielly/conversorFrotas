@@ -110,32 +110,27 @@ _entity = _entity_##class##_data.entity()
 utl = imports.util
 msg = imports.messages
 log = imports.log
+type = imports.typeConverter
+file = imports.file
+
+file_dir =r'D:\Conversao\Acacia\\410\destino\Arquivos\##Class##.txt'
+
+##class##_file = file.file_read(file_dir)
+
 class ##Class##LayoutReader:
 
     def ##class##_reader(self):
         global _entity
 
         _entity = dict.fromkeys(_entity, None)
-        
-        _entity['coluna'] = None
-        _entity['coluna'] = None
-        
-        # _entity['CODGRUPO'] = 99
-        # _entity['CODSUBGRUPO'] = 9999
-        # _entity['CODCLASSE'] = 11
-        # _entity['NOME'] = 'Product Name'
-        # _entity['IDDERIVACAOPRODUTO'] = 1
-        # _entity['CODCLASSEFAMILIA'] = None
-        # _entity['TEMPODEHISTORICO'] = None
-        # _entity['TEMPOREPOSICAO'] = None
-        # _entity['PERCENTUALSEGURANCA'] = None
-        # _entity['DATASINC'] = None
+        _line = file.lines_file(##class##_file,1)
+        ##entity##
         
         return _entity
       
     def check(self):
-        if _entity_##class##_data.exist(##constraints##):
-            log.log(f"A ##Class## com {##constraints##} já existe.", _entity_##class##.table_name(), logging.INFO)
+        if _entity_##class##_data.exist(##_entity_constraints##):
+            log.log(f"A ##Class## com {##_entity_constraints##} já existe.", _entity_##class##.table_name(), logging.INFO)
             return False
         return True
         
