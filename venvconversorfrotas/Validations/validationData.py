@@ -236,8 +236,14 @@ class ValidationData:
 
     def factory_entity(self, table, *args):
         entity = ""
+
         for i, colum in enumerate(args[0], start=0):
-            entity = entity +'\n'+(f"        _entity['{colum[0]}']=_line[{i}]")
+            if colum[1] == 'INTEGER':
+                entity = entity +'\n'+(f"        _entity['{colum[0]}']=type.to_integer(_line[{i}])")
+            elif colum[1] == 'VARCHAR':
+                entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_line[{i}])")
+            elif colum[1] == 'TIMESTAMP':
+                entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_line[{i}])")
         return entity
 
 # valid = ValidationData()

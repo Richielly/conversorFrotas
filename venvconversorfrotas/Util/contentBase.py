@@ -114,16 +114,15 @@ type = imports.typeConverter
 file = imports.file
 
 file_dir =r'D:\Conversao\Acacia\\410\destino\Arquivos\##Class##.txt'
-
 ##class##_file = file.file_read(file_dir)
 
 class ##Class##LayoutReader:
 
-    def ##class##_reader(self):
+    def ##class##_reader(self,_line):
         global _entity
 
         _entity = dict.fromkeys(_entity, None)
-        _line = file.lines_file(##class##_file,1)
+        
         ##entity##
         
         return _entity
@@ -135,12 +134,12 @@ class ##Class##LayoutReader:
         return True
         
 # teste = ClasseLayoutReader()
-# teste.classe_reader()
-# print(_entity)
-# if teste.check():
-#     _entity_classe_data.insert_data(_entity)
-
-# valid = imports.validation
-# print(valid.table_description(_entity_classe.table_name()))
+# 
+# for linha in range(1, classe_file.shape[0] + 1):
+#     _line = file.lines_file(classe_file, linha)
+#     teste.classe_reader(_line)
+# 
+#     if teste.check():
+#         _entity_classe_data.insert_data(_entity)
 """
 }
