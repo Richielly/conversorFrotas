@@ -222,10 +222,10 @@ class ValidationData:
         if len(args) != 0:
             for where in args:
                 if step < len(args):
-                    new_where = new_where + where + f" = {{{where}}} and "
+                    new_where = new_where + where + f" = '{{{where}}}' and "
                     step+=1
                 else:
-                    new_where = new_where + where + f" = {{{where}}} "
+                    new_where = new_where + where + f" = '{{{where}}}' "
                     step += 1
         return new_where
     def factory_exists(self, table, where):

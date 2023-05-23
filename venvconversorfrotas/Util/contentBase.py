@@ -79,7 +79,7 @@ class ##StepKey##LayoutData:
         
     def insert_data(self, values, homologacao=False):
         try:
-            if 'OPERADORCRIADOR' in column_not_null:
+            if 'DATACRIACAO' in column_not_null:
                 values = {**values,**_validation.default_log()}
             columns = ", ".join(values.keys())
             value = ", ".join(["?"] * len(values))
@@ -102,10 +102,12 @@ class ##StepKey##LayoutData:
 from Core import imports
 from Layout import ##class##Layout
 from LayoutData import ##layout##Data
+from Validations import validationData
 
 _entity_##class## = ##class##Layout.##Class##Layout()
 _entity_##class##_data = ##class##LayoutData.##Class##LayoutData()
 _entity = _entity_##class##_data.entity()
+_valid = validationData.ValidationData()
 
 utl = imports.util
 msg = imports.messages
@@ -133,13 +135,14 @@ class ##Class##LayoutReader:
             return False
         return True
         
-# teste = ClasseLayoutReader()
-# 
-# for linha in range(1, classe_file.shape[0] + 1):
-#     _line = file.lines_file(classe_file, linha)
-#     teste.classe_reader(_line)
-# 
-#     if teste.check():
-#         _entity_classe_data.insert_data(_entity)
+teste = ##Class##LayoutReader()
+
+for linha in range(1, ##class##_file.shape[0] + 1):
+    _line = file.lines_file(##class##_file, linha)
+    teste.##class##_reader(_line)
+
+    if teste.check():
+        _entity['ID'] = _valid.last_id(_entity_##class##.table_name())
+        _entity_##class##_data.insert_data(_entity)
 """
 }

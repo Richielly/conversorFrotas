@@ -1,14 +1,14 @@
 class Core:
 
     step = {
-            # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
-            # 'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
-            # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
-            # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
+            'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
+            'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
+            'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
+            'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
             'Classe': ['Classe', 'classeLayout', 'CLASSE', 'Classe.txt'],
             # 'Scp55_TCEPR_TipoAgrupamentoBem': ['Scp55_TCEPR_TipoAgrupamentoBem', 'scp55_TCEPR_TipoAgrupamentoBemLayout', 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM', 'Scp55_TCEPR_TipoAgrupamentoBem.txt'],
             # 'Scp55_TCEPR_TipoPropriedadeBem': ['Scp55_TCEPR_TipoPropriedadeBem', 'scp55_TCEPR_TipoPropriedadeBemLayout', 'SCP55_TCEPR_TIPOPROPRIEDADEBEM', 'Scp55_TCEPR_TipoPropriedadeBem.txt'],
-            # 'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
+            'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
             # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
             'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
