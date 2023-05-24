@@ -16,14 +16,14 @@ class Base:
             os.makedirs(dir)
         file_path = os.path.join(dir, file_name+'.py')
         if not os.path.exists(file_path):
-            with open(file_path, 'w') as file:
+            with open(file_path, 'w', encoding='ansi') as file:
                 file.write(content)
             return file_path
         else:
             return False
 
     def replace_content_file_py(self, file_path, old_content, new_content):
-        with open(file_path, 'r+') as file:
+        with open(file_path, 'r+', encoding='ansi') as file:
             lines = file.readlines()
             file.seek(0)
             for line in lines:
