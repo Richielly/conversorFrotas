@@ -95,6 +95,6 @@ def factoryLayoutReader():
             struct.replace_content_file_py(file_py_dir, '##_entity_constraints##', constrants.replace("['", "_entity['").replace("', '", "'], _entity['"))
             struct.replace_content_file_py(file_py_dir, '##entity##', utl.remove_chars(str(valid.factory_entity(table,valid.table_description(table))),['"',',']))
 
-# factoryLayout()
+factoryLayout()
 # factoryLayoutData()
-factoryLayoutReader()
+# factoryLayoutReader()

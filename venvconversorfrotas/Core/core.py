@@ -5,6 +5,7 @@ class Core:
             'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
             'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
+            'Sal_DerivacaoProduto': ['Sal_DerivacaoProduto', 'sal_DerivacaoProdutoLayout', 'SAL_DERIVACAOPRODUTO', 'Sal_DerivacaoProduto.txt'],
             'Classe': ['Classe', 'classeLayout', 'CLASSE', 'Classe.txt'],
             # 'Scp55_TCEPR_TipoAgrupamentoBem': ['Scp55_TCEPR_TipoAgrupamentoBem', 'scp55_TCEPR_TipoAgrupamentoBemLayout', 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM', 'Scp55_TCEPR_TipoAgrupamentoBem.txt'],
             # 'Scp55_TCEPR_TipoPropriedadeBem': ['Scp55_TCEPR_TipoPropriedadeBem', 'scp55_TCEPR_TipoPropriedadeBemLayout', 'SCP55_TCEPR_TIPOPROPRIEDADEBEM', 'Scp55_TCEPR_TipoPropriedadeBem.txt'],
