@@ -120,11 +120,10 @@ file_dir =r'D:\Conversao\Acacia\\410\destino\Arquivos\##Class##.txt'
 
 class ##Class##LayoutReader:
 
-    def ##class##_reader(self,_line):
+    def ##class##_reader(self,_column):
         global _entity
 
         _entity = dict.fromkeys(_entity, None)
-        
         ##entity##
         
         return _entity

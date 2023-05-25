@@ -47,10 +47,11 @@ def factoryLayout():
         file_name = core.step[f'{layout}']
         table = core.step[f'{layout}'][2]
         file_py_dir = struct.create_file_py('Layout', file_name=file_name[1], content=content)
+        constraints = valid.table_PK(table) if not valid.return_constraint_table(file_name[2]) else valid.return_constraint_table(file_name[2])
         if file_py_dir != False:
             struct.replace_content_file_py(file_py_dir, '##NomeArquivoTabela##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##NomeTabela##', file_name[2])
-            struct.replace_content_file_py(file_py_dir, '##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else str(valid.table_PK(table)))
+            struct.replace_content_file_py(file_py_dir, '##constraints##', str(constraints))
             struct.replace_content_file_py(file_py_dir, '##columnsNotNull##', str(columns_not_null_list(table)))
             struct.replace_content_file_py(file_py_dir, '##columns##', str(columns_list(table)))
             struct.replace_content_file_py(file_py_dir, '##primaryKey##', str(valid.table_PK(table)))
@@ -62,7 +63,7 @@ def factoryLayoutData():
         file_name = core.step[f'{layoutData}']
         table = core.step[f'{layoutData}'][2]
         file_py_dir = struct.create_file_py('LayoutData', file_name=file_name[1]+'Data', content=contentData)
-
+        constraints = valid.table_PK(table) if not valid.return_constraint_table(file_name[2]) else valid.return_constraint_table(file_name[2])
         if file_py_dir != False:
             where = valid.return_constraint_table(file_name[2])
             where = tuple(where)
@@ -74,7 +75,7 @@ def factoryLayoutData():
             struct.replace_content_file_py(file_py_dir, '##insert_into##', table)
             struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
             # struct.replace_content_file_py(file_py_dir,'##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else utl.remove_chars(str(valid.table_PK(table)),["[", "]", "'"]))
-            struct.replace_content_file_py(file_py_dir, '##constraints##', utl.remove_chars(str(valid.return_constraint_table(file_name[2])),["[", "]", "'"]) if valid.return_constraint_table(file_name[2]) else utl.remove_chars(str(valid.table_PK(table)),["[", "]", "'"]))
+            struct.replace_content_file_py(file_py_dir, '##constraints##', utl.remove_chars(str(constraints),["[", "]", "'"]))
             file_name.clear()
             fk_list(table)
 
@@ -83,16 +84,17 @@ def factoryLayoutReader():
         file_name = core.step[f'{layoutData}']
         table = core.step[f'{layoutData}'][2]
         file_py_dir = struct.create_file_py('LayoutReader', file_name=file_name[1]+'Reader', content=contentReader)
-        constrants = str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else str(valid.table_PK(table))
+        constraints = valid.table_PK(table) if not valid.return_constraint_table(file_name[2]) else valid.return_constraint_table(file_name[2])
+        print(constraints)
 
         if file_py_dir != False:
             struct.replace_content_file_py(file_py_dir, '##layout##', file_name[1])
             struct.replace_content_file_py(file_py_dir, '##Class##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##class##', utl.to_lowercase(file_name[0]))
-            struct.replace_content_file_py(file_py_dir, '##constraints##', constrants)
-            struct.replace_content_file_py(file_py_dir, '##_entity_constraints##', constrants.replace("['", "_entity['").replace("', '", "'], _entity['"))
+            struct.replace_content_file_py(file_py_dir, '##constraints##', str(constraints))
+            struct.replace_content_file_py(file_py_dir, '##_entity_constraints##', str(constraints).replace("['", "_entity['").replace("', '", "'], _entity['"))
             struct.replace_content_file_py(file_py_dir, '##entity##', utl.remove_chars(str(valid.factory_entity(table,valid.table_description(table))),['"',',']))
 
 # factoryLayout()
-factoryLayoutData()
-# factoryLayoutReader()
+# factoryLayoutData()
+factoryLayoutReader()
