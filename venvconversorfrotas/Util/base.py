@@ -30,4 +30,4 @@ class Base:
                 new_line = line.replace(old_content, new_content)
                 file.write(new_line)
             file.truncate()
-        print(f"Conteúdo substituído em {file_path}")
+        return file_path

@@ -236,8 +236,9 @@ class ValidationData:
 
     def factory_entity(self, table, *args):
         entity = ""
-        print(args)
+
         for i, colum in enumerate(args[0], start=0):
+
             if colum[1] == 'INTEGER':
                 if colum[4] == 'YES':
                     entity = entity +'\n'+(f"        _entity['{colum[0]}']=type.to_integer(_column[{i}]) #obrigatorio")
@@ -245,15 +246,13 @@ class ValidationData:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}])")
             elif colum[1] == 'VARCHAR':
                 if colum[4] == 'YES':
-                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}]) #obrigatorio")
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}]) #obrigatorio")
                 else:
-                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}])")
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}])")
             elif colum[1] == 'TIMESTAMP':
                 if colum[4] == 'YES':
-                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}]) #obrigatorio")
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}]) #obrigatorio")
                 else:
-                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}])")
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}])")
         return entity
 
-# valid = ValidationData()
-# print(valid.factory_entity('CLASSE', valid.table_description('CLASSE')))

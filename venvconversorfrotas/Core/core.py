@@ -1,8 +1,11 @@
 class Core:
 
     step = {
-            'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
+            # 'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
             'Scf_ParameterSystem' : ['Scf_ParameterSystem', 'scf_ParameterSystemLayout', 'SCF_PARAMETERSYSTEM', 'ParameterSystem.txt'],
+            'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
+            'CategoriaCnh' : ['CategoriaCnh','categoriaCnhLayout','SCF_CATEGORIACNH', 'CategoriaCnh.txt'],
+            'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
             # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
             # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
@@ -13,10 +16,10 @@ class Core:
             # 'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
             # # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
-            # 'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
+
             # 'Marca' : ['Marca','marcaLayout','MARCA', 'Marca.txt'],
-            # 'CategoriaCnh' : ['CategoriaCnh','categoriaCnhLayout','SCF_CATEGORIACNH', 'CategoriaCnh.txt'],
-            # 'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
+
+
             # 'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
             # 'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO'],
             # 'Pessoa' : ['Pessoa','pessoaLayout','PESSOA'],

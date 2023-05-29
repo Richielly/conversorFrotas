@@ -20,3 +20,8 @@ class File:
             return df_file.values
         else:
             return df_file.values[line - 1]
+
+    def data_line(self, file):
+        for linha in range(1, file.shape[0] + 1):
+            data = self.lines_file(file, linha)
+        return data

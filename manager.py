@@ -74,7 +74,6 @@ def factoryLayoutData():
             struct.replace_content_file_py(file_py_dir, '##StepKey##', file_name[0])
             struct.replace_content_file_py(file_py_dir, '##insert_into##', table)
             struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
-            # struct.replace_content_file_py(file_py_dir,'##constraints##', str(valid.return_constraint_table(file_name[2])) if not str(valid.return_constraint_table(file_name[2])) else utl.remove_chars(str(valid.table_PK(table)),["[", "]", "'"]))
             struct.replace_content_file_py(file_py_dir, '##constraints##', utl.remove_chars(str(constraints),["[", "]", "'"]))
             file_name.clear()
             fk_list(table)
@@ -85,7 +84,6 @@ def factoryLayoutReader():
         table = core.step[f'{layoutData}'][2]
         file_py_dir = struct.create_file_py('LayoutReader', file_name=file_name[1]+'Reader', content=contentReader)
         constraints = valid.table_PK(table) if not valid.return_constraint_table(file_name[2]) else valid.return_constraint_table(file_name[2])
-        print(constraints)
 
         if file_py_dir != False:
             struct.replace_content_file_py(file_py_dir, '##layout##', file_name[1])
@@ -97,4 +95,4 @@ def factoryLayoutReader():
 
 # factoryLayout()
 # factoryLayoutData()
-factoryLayoutReader()
+# factoryLayoutReader()

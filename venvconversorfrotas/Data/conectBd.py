@@ -11,7 +11,8 @@ class ConectBd:
         # String de conexão.
         dsn = f"{cfg['DEFAULT']['Host']}:{cfg['DEFAULT']['NomeBanco']}"
         # Conectando ao banco de dados.
-        connection = fdb.connect(dsn=dsn, user=cfg['DEFAULT']['User'], password=cfg['DEFAULT']['Password'])
+        connection = fdb.connect(dsn=dsn, user=cfg['DEFAULT']['User'], password=cfg['DEFAULT']['Password'], charset='ISO8859_1') # Definir o charset desejado, como UTF8, ISO8859_1, WIN1252
+
         cursor = connection.cursor()
         return cursor
 

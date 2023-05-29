@@ -87,11 +87,11 @@ class ##StepKey##LayoutData:
             cursor.execute(query, tuple(values.values()))
             if not homologacao:
                 cursor.connection.commit()
-                print("Dado inserido com sucesso!")
+                return "Dado inserido com sucesso!"
             else:
-                print("Dado Simulados com sucesso!")
+                return "Dado Simulados com sucesso!"
         except Exception as e:
-            print(f"Erro ao tentar inserir o dado: {e}")
+            return f"Erro ao tentar inserir o dado: {e}"
 
     def save_data(self, table_name, values, line):
         _validation.insert_data(table_name, columns, [values])
@@ -100,12 +100,12 @@ class ##StepKey##LayoutData:
  """,
 'layoutReader': """import logging
 from Core import imports
-from Layout import ##class##Layout
+from Layout import ##layout##
 from LayoutData import ##layout##Data
 from Validations import validationData
 
-_entity_##class## = ##class##Layout.##Class##Layout()
-_entity_##class##_data = ##class##LayoutData.##Class##LayoutData()
+_entity_##class## = ##layout##.##Class##Layout()
+_entity_##class##_data = ##layout##Data.##Class##LayoutData()
 _entity = _entity_##class##_data.entity()
 _valid = validationData.ValidationData()
 
