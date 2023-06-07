@@ -35,13 +35,15 @@ class ValidationData:
 
     def last_id(self, table):
         id_name = ValidationData().search_id_name(str(table))
-        global script_all
-        query = script_all.replace('*', f'max({str(id_name).strip()})').replace('table', f'{table}')
+        query = f"select max({str(id_name).strip()}) from {table}"
         id_name = ''
         cursor = ConectBd().connection()
         cursor.execute(query)
         result = cursor.fetchone()
-        return result[0] + 1
+        if not result[0]:
+            return 1
+        else:
+            return result[0] + 1
 
     def table_PK(self, table):
         clear = util.Util()
@@ -249,6 +251,13 @@ class ValidationData:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}]) #obrigatorio")
                 else:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}])")
+
+            elif colum[1] == 'DATE':
+                if colum[4] == 'YES':
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_date(_column[{i}]) #obrigatorio")
+                else:
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_date(_column[{i}])")
+
             elif colum[1] == 'TIMESTAMP':
                 if colum[4] == 'YES':
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}]) #obrigatorio")

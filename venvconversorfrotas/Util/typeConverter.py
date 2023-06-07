@@ -18,10 +18,15 @@ class TypeConverter:
     def to_bool(self, value):
         return bool(value)
 
-    def string_to_datetime(self, string_data, format='%Y-%m-%d %H:%M:%S'):
-        if string_data == '':
+    def string_to_datetime(self, string_date_time, format='%Y-%m-%d %H:%M:%S'):
+        if string_date_time == '':
             return None
-        return datetime.strptime(string_data, format)
+        return datetime.strptime(string_date_time, format)
+
+    def string_to_date(self, string_date, format='%d/%m/%Y'):
+        if string_date == '':
+            return None
+        return datetime.strptime(string_date, format).date()
 
     def datetime_to_string(self, datetime_data, format='%Y-%m-%d %H:%M:%S'):
         return datetime_data.strftime(format)

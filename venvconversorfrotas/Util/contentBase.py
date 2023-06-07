@@ -47,7 +47,6 @@ column_not_null = _layout.columns_not_null_get()
 columns = column_not_null + column
 
 conn = conectBd.ConectBd()
-cursor = conn.connection()
 
 class ##StepKey##LayoutData:
 
@@ -55,16 +54,18 @@ class ##StepKey##LayoutData:
         pass
 
     def entity(self):
-        global cursor
+        cursor = conn.connection()
         cursor.execute(f"select * from {table_name}")
         row = cursor.fetchone()
         columns = [desc[0] for desc in cursor.description]
+        if not row:
+            row = tuple(None for _ in range(len(columns)))
         entity = dict(zip(columns, row))
         return entity
 
     def exist(self, ##constraints##):
         try:
-            global cursor
+            cursor = conn.connection()
             script = f"##select_exist##"
             cursor.execute(script)
             result = cursor.fetchone()
@@ -79,6 +80,7 @@ class ##StepKey##LayoutData:
         
     def insert_data(self, values, homologacao=False):
         try:
+            cursor = conn.connection()
             if 'DATACRIACAO' in column_not_null:
                 values = {**values,**_validation.default_log()}
             columns = ", ".join(values.keys())
@@ -95,7 +97,7 @@ class ##StepKey##LayoutData:
 
     def save_data(self, table_name, values, line):
         _validation.insert_data(table_name, columns, [values])
-        _log.log(f'Linha {line}: ##Msg## foi gravada com sucesso.', filename=table_name, level=logging.INFO)
+        _log.log(f'Linha {line}: ##Msg## foi gravada com sucesso.', filename=table_name)
         return True 
  """,
 'layoutReader': """import logging
@@ -115,8 +117,7 @@ log = imports.log
 type = imports.typeConverter
 file = imports.file
 
-file_dir =r'D:\Conversao\Acacia\\410\destino\Arquivos\##Class##.txt'
-##class##_file = file.file_read(file_dir)
+#Calculados
 
 class ##Class##LayoutReader:
 
@@ -130,18 +131,22 @@ class ##Class##LayoutReader:
       
     def check(self):
         if _entity_##class##_data.exist(##_entity_constraints##):
-            log.log(f"A ##Class## com {##_entity_constraints##} já existe.", _entity_##class##.table_name(), logging.INFO)
+            log.log(f"A ##Class## com {##_entity_constraints##} já esta gravado.", _entity_##class##.table_name())
             return False
         return True
+    
+    def valid(self):
+        return True
         
-teste = ##Class##LayoutReader()
-
-for linha in range(1, ##class##_file.shape[0] + 1):
-    _line = file.lines_file(##class##_file, linha)
-    teste.##class##_reader(_line)
-
-    if teste.check():
+    def save(self):
         _entity['ID'] = _valid.last_id(_entity_##class##.table_name())
         _entity_##class##_data.insert_data(_entity)
+        
+    def run(self, _file):
+        for linha in range(1, _file.shape[0] + 1):
+            _line = file.lines_file(_file, linha)
+            self.##class##_reader(_line)
+            if self.check() and self.valid():
+                self.save()
 """
 }

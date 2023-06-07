@@ -4,8 +4,12 @@ class Core:
             # 'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
             'Scf_ParameterSystem' : ['Scf_ParameterSystem', 'scf_ParameterSystemLayout', 'SCF_PARAMETERSYSTEM', 'ParameterSystem.txt'],
             'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
+            'Marca' : ['Marca','marcaLayout','MARCA', 'Marca.txt'],
             'CategoriaCnh' : ['CategoriaCnh','categoriaCnhLayout','SCF_CATEGORIACNH', 'CategoriaCnh.txt'],
             'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
+            'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
+            'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO', 'TipoServico.txt'],
+            'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
             # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
             # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
@@ -17,13 +21,9 @@ class Core:
             # # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
 
-            # 'Marca' : ['Marca','marcaLayout','MARCA', 'Marca.txt'],
 
-
-            # 'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
-            # 'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO'],
             # 'Pessoa' : ['Pessoa','pessoaLayout','PESSOA'],
-            # 'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA'],
+
             # 'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH'],
             # 'MotoristaSituacaoCnh' : ['MotoristaSituacaoCnh','motoristaSituacaoCnhLayout','SCF_MOTORISTASITUACAOCNH'],
             # 'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO'],
