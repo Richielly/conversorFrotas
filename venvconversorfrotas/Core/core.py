@@ -9,8 +9,11 @@ class Core:
             'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
             'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
             'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO', 'TipoServico.txt'],
+            'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
+            'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
+            'Servidor': ['Servidor', 'servidorLayout', 'SERVIDOR','Servidor.txt'],
             'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
-            # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
+
             # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
             # 'Sal_DerivacaoProduto': ['Sal_DerivacaoProduto', 'sal_DerivacaoProdutoLayout', 'SAL_DERIVACAOPRODUTO', 'Sal_DerivacaoProduto.txt'],
@@ -42,5 +45,5 @@ class Core:
             # 'Nf' : ['Nf','nfLayout','SCF_NF'],
             # 'NfProduto' : ['NfProduto','nfProdutoLayout','SCF_NFPRODUTO'],
             # 'NfAbastecimento' : ['NfAbastecimento','nfAbastecimentoLayout','SCF_NFABASTECIMENTO']
-            # '': ['', 'Layout', '']
+            # '': ['', 'Layout', '', '']
             }

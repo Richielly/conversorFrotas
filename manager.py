@@ -78,7 +78,7 @@ class Manager:
                 struct.replace_content_file_py(file_py_dir, '##select_exist##', exists)
                 struct.replace_content_file_py(file_py_dir, '##constraints##', utl.remove_chars(str(constraints),["[", "]", "'"]))
                 file_name.clear()
-                self.fk_list(table)
+                # self.fk_list(table)
 
     def factoryLayoutReader(self):
         for layoutData in core.step:
@@ -95,6 +95,6 @@ class Manager:
                 struct.replace_content_file_py(file_py_dir, '##_entity_constraints##', str(constraints).replace("['", "_entity['").replace("', '", "'], _entity['"))
                 struct.replace_content_file_py(file_py_dir, '##entity##', utl.remove_chars(str(valid.factory_entity(table,valid.table_description(table))),['"',',']))
 
-Manager().factoryLayout()
-Manager().factoryLayoutData()
+# Manager().factoryLayout()
+# Manager().factoryLayoutData()
 Manager().factoryLayoutReader()

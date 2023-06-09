@@ -246,18 +246,28 @@ class ValidationData:
                     entity = entity +'\n'+(f"        _entity['{colum[0]}']=type.to_integer(_column[{i}]) #obrigatorio")
                 else:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_integer(_column[{i}])")
+
+            if colum[1] == 'BIGINT':
+                if colum[4] == 'YES':
+                    entity = entity +'\n'+(f"        _entity['{colum[0]}']=type.to_float(_column[{i}]) #obrigatorio")
+                else:
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_float(_column[{i}])")
+
+            elif colum[1] == 'CHAR':
+                if colum[4] == 'YES':
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}]) #obrigatorio")
+                else:
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}])")
             elif colum[1] == 'VARCHAR':
                 if colum[4] == 'YES':
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}]) #obrigatorio")
                 else:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}])")
-
             elif colum[1] == 'DATE':
                 if colum[4] == 'YES':
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_date(_column[{i}]) #obrigatorio")
                 else:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_date(_column[{i}])")
-
             elif colum[1] == 'TIMESTAMP':
                 if colum[4] == 'YES':
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}]) #obrigatorio")
