@@ -13,6 +13,10 @@ class Core:
             'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
             'Servidor': ['Servidor', 'servidorLayout', 'SERVIDOR','Servidor.txt'],
             'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
+            'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH', 'MotoristaCategoriaCnh.txt'],
+            'SituacaoCnh': ['SituacaoCnh', 'situacaoCnhLayout', 'SITUACAOCNH', ''],
+            'MotoristaSituacaoCnh' : ['MotoristaSituacaoCnh','motoristaSituacaoCnhLayout','SCF_MOTORISTASITUACAOCNH', 'MotoristaSituacaoCnh.txt'],
+            'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO', 'Veiculo.txt'],
 
             # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
@@ -24,11 +28,6 @@ class Core:
             # # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
 
-
-            # 'Pessoa' : ['Pessoa','pessoaLayout','PESSOA'],
-
-            # 'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH'],
-            # 'MotoristaSituacaoCnh' : ['MotoristaSituacaoCnh','motoristaSituacaoCnhLayout','SCF_MOTORISTASITUACAOCNH'],
             # 'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO'],
             # 'Produto': ['Produto','produtoLayout','SCF_PRODUTO'],
             # 'VeiculoProduto':['VeiculoProduto', 'veiculoProdutoLayout', 'SCF_VEICULOPRODUTO'],
