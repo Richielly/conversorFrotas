@@ -2,10 +2,11 @@ import pandas as pd
 class File:
 
     def file_read(self, file):
-        df = pd.read_csv(file, sep='|', header=None, encoding='ansi')
+        df = pd.read_csv(file, sep='|', header=None, encoding='ansi', dtype='str')
         df.index = range(1, len(df) + 1)
         df = df.drop(df.shape[1]-1, axis=1)
         df = df.fillna(value='')
+        df = df.astype(str)
 
         return df
 
