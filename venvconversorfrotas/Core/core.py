@@ -46,6 +46,8 @@ class Core:
             'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
             'Scp55_TcePR_TipoAgrupamentoBem': ['Scp55_TcePR_TipoAgrupamentoBem', 'scp55_TcePR_TipoAgrupamentoBemLayout', 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM', 'Bem.txt'],
             'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
+            'Fornecedor': ['Fornecedor', 'fornecedorLayout', 'Fornecedor', 'Fornecedor.txt'],
+            'Scp55_ContaContabil': ['Scp55_ContaContabil', 'scp55_ContaContabilLayout', 'SCP55_CONTACONTABIL', 'ContaContabil.txt'],
             # 'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
             # 'SaldoAnteriorBem': ['SaldoAnteriorBem', 'saldoAnteriorBemLayout', 'SCP55_SALDOANTERIORBEM', 'SaldoAnteriorBem.txt'],
             # '': ['', 'Layout', '', '']

@@ -96,5 +96,5 @@ class Manager:
                 struct.replace_content_file_py(file_py_dir, '##entity##', utl.remove_chars(str(valid.factory_entity(table,valid.table_description(table))),['"',',']))
 
 # Manager().factoryLayout()
-# Manager().factoryLayoutData()
+Manager().factoryLayoutData()
 # Manager().factoryLayoutReader()
