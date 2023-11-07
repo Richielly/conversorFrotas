@@ -2,21 +2,21 @@ class Core:
 
     step = {
             # 'Entidade': ['Entidade', 'entidadeLayout', 'ENTIDADE', 'Entidade.txt'],
-            'Scf_ParameterSystem' : ['Scf_ParameterSystem', 'scf_ParameterSystemLayout', 'SCF_PARAMETERSYSTEM', 'ParameterSystem.txt'],
-            'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
-            'Marca' : ['Marca','marcaLayout','MARCA', 'Marca.txt'],
-            'CategoriaCnh' : ['CategoriaCnh','categoriaCnhLayout','SCF_CATEGORIACNH', 'CategoriaCnh.txt'],
-            'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
-            'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
-            'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO', 'TipoServico.txt'],
-            'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
-            'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
-            'Servidor': ['Servidor', 'servidorLayout', 'SERVIDOR','Servidor.txt'],
-            'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
-            'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH', 'MotoristaCategoriaCnh.txt'],
-            'SituacaoCnh': ['SituacaoCnh', 'situacaoCnhLayout', 'SITUACAOCNH', ''],
-            'MotoristaSituacaoCnh' : ['MotoristaSituacaoCnh','motoristaSituacaoCnhLayout','SCF_MOTORISTASITUACAOCNH', 'MotoristaSituacaoCnh.txt'],
-            'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO', 'Veiculo.txt'],
+            # 'Scf_ParameterSystem' : ['Scf_ParameterSystem', 'scf_ParameterSystemLayout', 'SCF_PARAMETERSYSTEM', 'ParameterSystem.txt'],
+            # 'Cor': ['Cor', 'corLayout', 'COR', 'Cor.txt'],
+            # 'Marca' : ['Marca','marcaLayout','MARCA', 'Marca.txt'],
+            # 'CategoriaCnh' : ['CategoriaCnh','categoriaCnhLayout','SCF_CATEGORIACNH', 'CategoriaCnh.txt'],
+            # 'Especie' : ['Especie','especieLayout','SCF_ESPECIE', 'especie.txt'],
+            # 'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
+            # 'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO', 'TipoServico.txt'],
+            # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
+            # 'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
+            # 'Servidor': ['Servidor', 'servidorLayout', 'SERVIDOR','Servidor.txt'],
+            # 'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
+            # 'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH', 'MotoristaCategoriaCnh.txt'],
+            # 'SituacaoCnh': ['SituacaoCnh', 'situacaoCnhLayout', 'SITUACAOCNH', ''],
+            # 'MotoristaSituacaoCnh' : ['MotoristaSituacaoCnh','motoristaSituacaoCnhLayout','SCF_MOTORISTASITUACAOCNH', 'MotoristaSituacaoCnh.txt'],
+            # 'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO', 'Veiculo.txt'],
 
             # 'Grupo': ['Grupo', 'grupoLayout', 'GRUPO', 'Grupo.txt'],
             # 'SubGrupo': ['SubGrupo', 'subGrupoLayout', 'SUBGRUPO', 'SubGrupo.txt'],
@@ -24,10 +24,8 @@ class Core:
             # 'Classe': ['Classe', 'classeLayout', 'CLASSE', 'Classe.txt'],
             # # 'Scp55_TCEPR_TipoAgrupamentoBem': ['Scp55_TCEPR_TipoAgrupamentoBem', 'scp55_TCEPR_TipoAgrupamentoBemLayout', 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM', 'Scp55_TCEPR_TipoAgrupamentoBem.txt'],
             # # 'Scp55_TCEPR_TipoPropriedadeBem': ['Scp55_TCEPR_TipoPropriedadeBem', 'scp55_TCEPR_TipoPropriedadeBemLayout', 'SCP55_TCEPR_TIPOPROPRIEDADEBEM', 'Scp55_TCEPR_TipoPropriedadeBem.txt'],
-            # 'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
             # # 'ProdutoScp': ['ProdutoScp', 'produtoLayout', 'PRODUTO'],
             # # 'ParameterSystem' : ['ParameterSystem','parameterSystemLayout', 'SCF_PARAMETERSYSTEM'],
-
             # 'Veiculo' : ['Veiculo','veiculoLayout','SCF_VEICULO'],
             # 'Produto': ['Produto','produtoLayout','SCF_PRODUTO'],
             # 'VeiculoProduto':['VeiculoProduto', 'veiculoProdutoLayout', 'SCF_VEICULOPRODUTO'],
@@ -44,5 +42,12 @@ class Core:
             # 'Nf' : ['Nf','nfLayout','SCF_NF'],
             # 'NfProduto' : ['NfProduto','nfProdutoLayout','SCF_NFPRODUTO'],
             # 'NfAbastecimento' : ['NfAbastecimento','nfAbastecimentoLayout','SCF_NFABASTECIMENTO']
+
+            'Bem': ['Bem', 'bemLayout', 'SCP55_BEM', 'Bem.txt'],
+            'Scp55_TcePR_TipoAgrupamentoBem': ['Scp55_TcePR_TipoAgrupamentoBem', 'scp55_TcePR_TipoAgrupamentoBemLayout', 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM', 'Bem.txt'],
+            'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
+            # 'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
+            # 'SaldoAnteriorBem': ['SaldoAnteriorBem', 'saldoAnteriorBemLayout', 'SCP55_SALDOANTERIORBEM', 'SaldoAnteriorBem.txt'],
             # '': ['', 'Layout', '', '']
+
             }

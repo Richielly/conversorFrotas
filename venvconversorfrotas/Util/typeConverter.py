@@ -4,12 +4,13 @@ class TypeConverter:
 
     def to_string(self, value):
         return str(value)
-
+    def string_to_blob(self, value):
+        # Converte a string para bytes, o que é necessário para armazenar como BLOB
+        return bytes(value, 'utf-8')
     def to_integer(self, value):
         if value == '':
             return None
         return int(value)
-
     def to_float(self, value):
         if value == '':
             return None

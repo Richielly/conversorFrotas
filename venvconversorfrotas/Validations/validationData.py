@@ -240,7 +240,7 @@ class ValidationData:
         entity = ""
 
         for i, colum in enumerate(args[0], start=0):
-
+            # print(colum[1])
             if colum[1] == 'INTEGER':
                 if colum[4] == 'YES':
                     entity = entity +'\n'+(f"        _entity['{colum[0]}']=type.to_integer(_column[{i}]) #obrigatorio")
@@ -273,5 +273,10 @@ class ValidationData:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}]) #obrigatorio")
                 else:
                     entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.string_to_datetime(_column[{i}])")
+            elif colum[1] == 'BLOB':
+                if colum[4] == 'YES':
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}]) #obrigatorio")
+                else:
+                    entity = entity + '\n' + (f"        _entity['{colum[0]}']=type.to_string(_column[{i}])")
         return entity
 

@@ -146,7 +146,7 @@ class ##Class##LayoutReader:
         for linha in range(1, _file.shape[0] + 1):
             _line = file.lines_file(_file, linha)
             self.##class##_reader(_line)
-            if self.check() and self.valid():
+            if self.check(linha) and self.valid(linha):
                 self.save()
 """
 }

@@ -50,6 +50,9 @@ class Util:
     def remove_pipe_char(self, text):
         return text.replace("|", "")
 
+    def valid_size(self, string, max_size):
+        return len(string) <= max_size
+
     def set_current_seconds(self, datetime):
         current_seconds = datetime.now().second
         return dt.replace(second=current_seconds)

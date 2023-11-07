@@ -6,14 +6,14 @@ from datetime import datetime
 cfg = configparser.ConfigParser()
 cfg.read(r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
 class Log:
-    def log(self, msg, filename='geral'):
+    def log(self, line='?', msg='?', filename='geral'):
         log_dir = cfg['DEFAULT']['DiretorioArquivosLog']
         if not os.path.exists(log_dir):
             os.makedirs(log_dir)
         log_file = os.path.join(log_dir, filename + '_log.txt')
         try:
             now = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-            log_time = f"[{now}] {msg}"
+            log_time = f"[{now}] Linha: [{line}] {msg}"
 
             if os.path.exists(log_file):
                 mode = 'a'
