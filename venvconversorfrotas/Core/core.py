@@ -49,7 +49,7 @@ class Core:
             'Fornecedor': ['Fornecedor', 'fornecedorLayout', 'Fornecedor', 'Fornecedor.txt'],
             'Scp55_ContaContabil': ['Scp55_ContaContabil', 'scp55_ContaContabilLayout', 'SCP55_CONTACONTABIL', 'ContaContabil.txt'],
             # 'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
-            # 'SaldoAnteriorBem': ['SaldoAnteriorBem', 'saldoAnteriorBemLayout', 'SCP55_SALDOANTERIORBEM', 'SaldoAnteriorBem.txt'],
+            'SaldoAnteriorBem': ['SaldoAnteriorBem', 'saldoAnteriorBemLayout', 'SCP55_SALDOANTERIORBEM', 'SaldoAnteriorBem.txt'],
             # '': ['', 'Layout', '', '']
 
             }

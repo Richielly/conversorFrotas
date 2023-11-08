@@ -142,11 +142,9 @@ class ##Class##LayoutReader:
         _entity['ID'] = _valid.last_id(_entity_##class##.table_name())
         _entity_##class##_data.insert_data(_entity)
         
-    def run(self, _file):
-        for linha in range(1, _file.shape[0] + 1):
-            _line = file.lines_file(_file, linha)
-            self.##class##_reader(_line)
-            if self.check(linha) and self.valid(linha):
-                self.save()
+    def run(self, line_data, linha):
+        self.##class##_reader(line_data)
+        if self.check(linha) and self.valid(linha):
+            self.save()
 """
 }
