@@ -4,7 +4,7 @@ from Util.base import Base as base
 import os
 from datetime import datetime
 cfg = configparser.ConfigParser()
-cfg.read(r'C:\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
+cfg.read('cfg.ini')
 class Log:
     def log(self, line='?', msg='?', filename='geral'):
         log_dir = cfg['DEFAULT']['DiretorioArquivosLog']
