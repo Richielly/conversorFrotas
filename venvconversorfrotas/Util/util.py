@@ -1,5 +1,7 @@
 from datetime import datetime
 import configparser
+import os
+import shutil
 class Util:
 
     def remove_spaces(self, text):
@@ -71,3 +73,25 @@ class Util:
         # Salva as alterações no arquivo de configuração
         with open(ini, 'w') as configfile:
             cfg.write(configfile)
+
+    def move_file_if_exists(self,origem_directory, file_name, dest_directory):
+        """
+        Move um arquivo .txt para o diretório especificado se ele existir.
+
+        :param file_name: Nome do arquivo a ser movido.
+        :param dest_directory: Diretório de destino para onde o arquivo será movido.
+        """
+        # Verifica se o arquivo existe no diretório de trabalho atual
+        if not os.path.isfile(origem_directory + file_name):
+            print( f"O arquivo {file_name} não existe no diretório atual.")
+
+        # Verifica se o diretório de destino existe, se não, cria
+        if not os.path.isdir(dest_directory):
+            os.makedirs(dest_directory)
+
+        if os.path.isfile(dest_directory + file_name):
+            os.remove(dest_directory + file_name)
+
+        # Move o arquivo
+        shutil.move(origem_directory + file_name, dest_directory)
+        print( f"O arquivo {file_name} foi movido para {dest_directory}.")

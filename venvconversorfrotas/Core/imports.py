@@ -1,12 +1,6 @@
-import validationData
-import core
-import util
-import log
-import file
-import messages
-import base
-import contentBase
-import typeConverter
+from Validations import validationData
+from Core import core
+from Util import util,log, file, messages, base, contentBase, typeConverter
 
 #Util
 validation = validationData.ValidationData()

@@ -22,14 +22,14 @@ class ##NomeArquivoTabela##Layout:
 'layoutData': """import configparser
 import logging
 import pandas as pd
-import core
+from Core import core
 from Data import conectBd
 from Validations import validationData
 from Layout import ##layout_py##
 from Util import log, util, typeConverter
 
 cfg = configparser.ConfigParser()
-cfg.read(r'C:\\Users\Equiplano\PycharmProjects\conversorFrotas\cfg.ini')
+cfg.read('cfg.ini')
 path_dir = cfg['DEFAULT']['DiretorioArquivos']
 _util = util.Util()
 _converter = typeConverter.TypeConverter()
