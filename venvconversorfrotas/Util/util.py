@@ -56,9 +56,24 @@ class Util:
     def valid_size(self, string, max_size):
         return len(string) <= max_size
 
-    def set_current_seconds(self, datetime):
+    def set_current_seconds(self, dt):
         current_seconds = datetime.now().second
         return dt.replace(second=current_seconds)
+
+    def set_current_seconds_and_milliseconds_firebird(self, date_str):
+        # Convertendo a string para um objeto datetime
+        dt = datetime.strptime(date_str, '%d/%m/%Y %H:%M')
+
+        # Obtendo os segundos e milissegundos atuais
+        current_seconds = datetime.now().second
+        current_microseconds = datetime.now().microsecond
+        current_milliseconds = int(current_microseconds / 1000)
+
+        # Atualizando o objeto datetime com os segundos e milissegundos atuais
+        updated_dt = dt.replace(second=current_seconds, microsecond=current_milliseconds * 1000)
+
+        # Formatando o objeto datetime para a string no formato desejado
+        return updated_dt.strftime('%d/%m/%Y %H:%M:%S.%f')[:-3]
 
     def read_file(self, file_name):
         with open(file_name, 'r') as f:
