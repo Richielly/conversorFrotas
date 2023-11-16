@@ -2,6 +2,8 @@ from datetime import datetime
 import configparser
 import os
 import shutil
+import re
+from datetime import datetime
 class Util:
 
     def remove_spaces(self, text):
@@ -110,3 +112,57 @@ class Util:
         # Move o arquivo
         shutil.move(origem_directory + file_name, dest_directory)
         print( f"O arquivo {file_name} foi movido para {dest_directory}.")
+    def create_file(self, filename):
+        cfg = configparser.ConfigParser()
+        cfg.read('cfg.ini')
+        dir = cfg['DEFAULT']['diretorioarquivos']
+        file_dir_name = os.path.join(dir, filename + '.ini')
+        if not os.path.exists(file_dir_name):
+            with open(file_dir_name, 'w') as file:
+                file.write('[DEFAULT]' + '\n')
+        return file_dir_name
+
+    def atualizar_ou_criar_secao_config(self, nome_arquivo, secao, configuracoes):
+        # Cria uma instância de ConfigParser
+        config = configparser.ConfigParser()
+
+        # Lê o arquivo de configuração existente, se ele existir
+        config.read(nome_arquivo)
+
+        # Adiciona a seção se ela não existir
+        if not config.has_section(secao):
+            config.add_section(secao)
+
+        # Atualiza as configurações na seção
+        for chave, valor in configuracoes.items():
+            config.set(secao, chave, valor)
+
+        # Escreve as alterações no arquivo de configuração
+        with open(nome_arquivo, 'w') as configfile:
+            config.write(configfile)
+
+    def listar_secoes(self, nome_arquivo):
+        config = configparser.ConfigParser()
+        config.read(nome_arquivo)
+        return config.sections()
+
+    def mostrar_configuracoes(self, nome_arquivo, secao):
+        config = configparser.ConfigParser()
+        config.read(nome_arquivo)
+
+        if config.has_section(secao):
+            return dict(config.items(secao))
+        else:
+            return None
+
+    def obter_secao_configuracao(self, nome_arquivo):
+        config = configparser.ConfigParser()
+        config.read(nome_arquivo)
+
+        configuracoes_simples = {}
+        for secao in config.sections():
+            # Assumindo que cada seção tem apenas uma configuração
+            chave, valor = next(iter(config.items(secao)))
+            configuracoes_simples[secao] = valor
+
+        return configuracoes_simples

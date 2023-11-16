@@ -25,7 +25,7 @@ def pages(page: ft.Page):
 
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_center()
-    page.title = "Importador do Bens "+ str(entidade) + " V_1.1.0"
+    page.title = "Importador dos Bens "+ str(entidade) + " V_1.1.2"
     progressBar = ft.ProgressBar(width=700, color=ft.colors.GREEN_ACCENT_700)
 
     def btn_click(e):
