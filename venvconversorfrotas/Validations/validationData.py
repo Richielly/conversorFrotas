@@ -38,12 +38,13 @@ class ValidationData:
         query = f"select max({str(id_name).strip()}) from {table}"
         id_name = ''
         cursor = ConectBd().connection()
-        cursor.execute(query)
-        result = cursor.fetchone()
-        if not result[0]:
-            return 1
-        else:
-            return result[0] + 1
+        if cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            if not result[0]:
+                return 1
+            else:
+                return result[0] + 1
 
     def table_PK(self, table):
         clear = util.Util()
@@ -204,11 +205,12 @@ class ValidationData:
                 WHERE c.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY' AND c.RDB$RELATION_NAME = '{table}';
                 """
         cursor = ConectBd().connection()
-        cursor.execute(query)
-        result  = cursor.fetchone()
-        cursor.close()
-        cursor.connection.close()
-        return result[0]
+        if cursor:
+            cursor.execute(query)
+            result  = cursor.fetchone()
+            cursor.close()
+            cursor.connection.close()
+            return result[0]
 
     def query(self, query):
         cursor = ConectBd().connection()

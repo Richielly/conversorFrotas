@@ -25,8 +25,6 @@ cfg.read('cfg.ini')
 entidade = cfg['DEFAULT']['nomeentidade']
 txt_header = ''
 
-
-
 utl.update_cfg(secao='DEFAULT', chave='dir',new=os.getcwd())
 utl.update_cfg(secao='DEFAULT', chave='diretorioarquivoslog',new=f'{os.getcwd()}\Logs\\')
 utl.update_cfg(secao='DEFAULT', chave='diretorioarquivosprocessados',new=f'{os.getcwd()}\Processados\\')
@@ -37,20 +35,20 @@ def pages(page: ft.Page):
     page.title = "Importador dos Bens "+ str(entidade) + " V_1.1.3"
     progressBar = ft.ProgressBar(width=700, color=ft.colors.GREEN_ACCENT_700)
 
-
     def sincronizar(e):
         page.update()
         utl.update_cfg(secao='DEFAULT', chave='nomebanco', new=txt_database.value)
         cfg.read('cfg.ini')
         sqls = Script().query(txt_entidade.value)
         analise_data = {}
-        for sql in sqls.items():
-            cursor.execute(sql[1])
-            analise_data[sql[0]] = cursor.fetchone()
-        analise_bem_origem.value  = analise_data['Bem'][0]
-        analise_tombamento_origem.value = analise_data['TombamentoBem'][0]
-        analise_saldo_anterior_bem_origem.value = analise_data['SaldoAnteriorBem'][0]
-        page.update()
+        if cursor:
+            for sql in sqls.items():
+                cursor.execute(sql[1])
+                analise_data[sql[0]] = cursor.fetchone()
+            analise_bem_origem.value  = str(analise_data['Bem'][0])+'                 '
+            analise_tombamento_origem.value = str(analise_data['TombamentoBem'][0])+'                 '
+            analise_saldo_anterior_bem_origem.value = str(analise_data['SaldoAnteriorBem'][0])+'                 '
+            page.update()
 
     def btn_click(e):
         if not txt_database.value:
@@ -60,6 +58,7 @@ def pages(page: ft.Page):
         utl.update_cfg(secao='DEFAULT', chave='diretorioarquivos', new=f'{txt_local_arquivos.value}\\')
         utl.update_cfg(new=txt_entidade.value)
         cfg.read('cfg.ini')
+
         page.add(txt_header)
         file_dir_bem = cfg['DEFAULT']['DiretorioArquivos'] + core.step['Bem'][3]
         if os.path.isfile(file_dir_bem):
@@ -68,9 +67,10 @@ def pages(page: ft.Page):
             for linha in range(1, bem_file.shape[0] + 1):
                 linha_data = file.lines_file(bem_file, linha)
                 bem = bemReader.BemLayoutReader()
-                bem.run(linha_data, linha)
+                if bem.run(linha_data, linha):
+                    analise_bem_destino.value = str(int(analise_bem_destino.value) + 1)+'                 '
                 txt_header.value = f"Arquivo Bem Executando {linha}/{bem_file.shape[0]}"
-                analise_bem_destino.value = linha
+
                 page.update()
             utl.move_file_if_exists(cfg['DEFAULT']['DiretorioArquivos'], core.step['Bem'][3], cfg['DEFAULT']['diretorioarquivosprocessados'])
 
@@ -122,20 +122,21 @@ def pages(page: ft.Page):
     list_arquivos = ft.ListView(expand=1, spacing=2, padding=20, auto_scroll=True)
     divisor = ft.Divider(height=2, thickness=3)
 
-    analise_bem_label = ft.Text("Bem", size=30, color='purple')
-    analise_bem_origem = ft.Text("0", size=50, color='green')
-    analise_bem_destino = ft.Text("0", size=70, color='red')
-    analise_bem = ft.Column([analise_bem_label, analise_bem_origem, analise_bem_destino], alignment=ft.alignment.center)
+    analise_header_label = ft.Text("Tabela                          Origem                        Convertido", size=30, color='black')
+    analise_bem_label = ft.Text("Bem                           ", size=30, color='purple')
+    analise_bem_origem = ft.Text("0                 ", size=50, color='green')
+    analise_bem_destino = ft.Text("0                 ", size=70, color='red')
+    analise_bem = ft.Row([analise_bem_label, analise_bem_origem, analise_bem_destino], alignment=ft.alignment.center_right)
 
-    analise_tombamento_label = ft.Text("Tombamento", size=30, color='purple')
-    analise_tombamento_origem = ft.Text("0", size=50, color='green')
-    analise_tombamento_destino = ft.Text("0", size=70, color='red')
-    analise_tombamento = ft.Column([analise_tombamento_label, analise_tombamento_origem, analise_tombamento_destino], alignment=ft.alignment.center)
+    analise_tombamento_label = ft.Text("Tombamento              ", size=30, color='purple')
+    analise_tombamento_origem = ft.Text("0                 ", size=50, color='green')
+    analise_tombamento_destino = ft.Text("0                 ", size=70, color='red')
+    analise_tombamento = ft.Row([analise_tombamento_label, analise_tombamento_origem, analise_tombamento_destino], alignment=ft.alignment.center_right)
 
-    analise_saldo_anterior_bem_label = ft.Text("Saldo Anterior", size=30, color='purple')
-    analise_saldo_anterior_bem_origem = ft.Text("0", size=50, color='green')
-    analise_saldo_anterior_bem_destino = ft.Text("0", size=70, color='red')
-    analise_saldo_anterior_bem = ft.Column([analise_saldo_anterior_bem_label, analise_saldo_anterior_bem_origem, analise_saldo_anterior_bem_destino], alignment=ft.alignment.center)
+    analise_saldo_anterior_bem_label = ft.Text("Saldo Anterior            ", size=30, color='purple')
+    analise_saldo_anterior_bem_origem = ft.Text("0                 ", size=50, color='green')
+    analise_saldo_anterior_bem_destino = ft.Text("0                 ", size=70, color='red')
+    analise_saldo_anterior_bem = ft.Row([analise_saldo_anterior_bem_label, analise_saldo_anterior_bem_origem, analise_saldo_anterior_bem_destino], alignment=ft.alignment.center_right)
 
     btn_sincronizar_banco = ft.ElevatedButton("Sincronizar", on_click=sincronizar, icon=ft.icons.UPGRADE)
 
@@ -157,7 +158,7 @@ def pages(page: ft.Page):
                 text="Analise",
                 icon=ft.icons.MULTILINE_CHART,
                 content=ft.Container(
-                                    content=ft.Row([btn_sincronizar_banco,analise_bem,analise_tombamento,analise_saldo_anterior_bem],alignment=ft.alignment.center),
+                                    content=ft.Column([btn_sincronizar_banco,analise_header_label,analise_bem,analise_tombamento,analise_saldo_anterior_bem],alignment=ft.alignment.center),
                                     alignment=ft.alignment.center,
                                     padding=50,
                                     border_radius=10,
