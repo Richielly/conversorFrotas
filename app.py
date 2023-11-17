@@ -2,13 +2,20 @@ import os
 import flet as ft
 import configparser
 
+from Data import conectBd
 from Core import imports
 from Util import util
 from LayoutReader import bemLayoutReader as bemReader
 from LayoutReader import tombamentoBemLayoutReader as tombamento_bemReader
 from LayoutReader import saldoAnteriorBemLayoutReader as saldo_anterior_bemReader
 
+from script_analise_destino import Script
+
+
 utl = util.Util()
+
+conn = conectBd.ConectBd()
+cursor = conn.connection()
 
 core = imports.core
 file = imports.file
@@ -18,6 +25,8 @@ cfg.read('cfg.ini')
 entidade = cfg['DEFAULT']['nomeentidade']
 txt_header = ''
 
+
+
 utl.update_cfg(secao='DEFAULT', chave='dir',new=os.getcwd())
 utl.update_cfg(secao='DEFAULT', chave='diretorioarquivoslog',new=f'{os.getcwd()}\Logs\\')
 utl.update_cfg(secao='DEFAULT', chave='diretorioarquivosprocessados',new=f'{os.getcwd()}\Processados\\')
@@ -25,8 +34,23 @@ def pages(page: ft.Page):
 
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_center()
-    page.title = "Importador dos Bens "+ str(entidade) + " V_1.1.2"
+    page.title = "Importador dos Bens "+ str(entidade) + " V_1.1.3"
     progressBar = ft.ProgressBar(width=700, color=ft.colors.GREEN_ACCENT_700)
+
+
+    def sincronizar(e):
+        page.update()
+        utl.update_cfg(secao='DEFAULT', chave='nomebanco', new=txt_database.value)
+        cfg.read('cfg.ini')
+        sqls = Script().query(txt_entidade.value)
+        analise_data = {}
+        for sql in sqls.items():
+            cursor.execute(sql[1])
+            analise_data[sql[0]] = cursor.fetchone()
+        analise_bem_origem.value  = analise_data['Bem'][0]
+        analise_tombamento_origem.value = analise_data['TombamentoBem'][0]
+        analise_saldo_anterior_bem_origem.value = analise_data['SaldoAnteriorBem'][0]
+        page.update()
 
     def btn_click(e):
         if not txt_database.value:
@@ -36,7 +60,6 @@ def pages(page: ft.Page):
         utl.update_cfg(secao='DEFAULT', chave='diretorioarquivos', new=f'{txt_local_arquivos.value}\\')
         utl.update_cfg(new=txt_entidade.value)
         cfg.read('cfg.ini')
-
         page.add(txt_header)
         file_dir_bem = cfg['DEFAULT']['DiretorioArquivos'] + core.step['Bem'][3]
         if os.path.isfile(file_dir_bem):
@@ -47,6 +70,7 @@ def pages(page: ft.Page):
                 bem = bemReader.BemLayoutReader()
                 bem.run(linha_data, linha)
                 txt_header.value = f"Arquivo Bem Executando {linha}/{bem_file.shape[0]}"
+                analise_bem_destino.value = linha
                 page.update()
             utl.move_file_if_exists(cfg['DEFAULT']['DiretorioArquivos'], core.step['Bem'][3], cfg['DEFAULT']['diretorioarquivosprocessados'])
 
@@ -98,22 +122,46 @@ def pages(page: ft.Page):
     list_arquivos = ft.ListView(expand=1, spacing=2, padding=20, auto_scroll=True)
     divisor = ft.Divider(height=2, thickness=3)
 
+    analise_bem_label = ft.Text("Bem", size=30, color='purple')
+    analise_bem_origem = ft.Text("0", size=50, color='green')
+    analise_bem_destino = ft.Text("0", size=70, color='red')
+    analise_bem = ft.Column([analise_bem_label, analise_bem_origem, analise_bem_destino], alignment=ft.alignment.center)
+
+    analise_tombamento_label = ft.Text("Tombamento", size=30, color='purple')
+    analise_tombamento_origem = ft.Text("0", size=50, color='green')
+    analise_tombamento_destino = ft.Text("0", size=70, color='red')
+    analise_tombamento = ft.Column([analise_tombamento_label, analise_tombamento_origem, analise_tombamento_destino], alignment=ft.alignment.center)
+
+    analise_saldo_anterior_bem_label = ft.Text("Saldo Anterior", size=30, color='purple')
+    analise_saldo_anterior_bem_origem = ft.Text("0", size=50, color='green')
+    analise_saldo_anterior_bem_destino = ft.Text("0", size=70, color='red')
+    analise_saldo_anterior_bem = ft.Column([analise_saldo_anterior_bem_label, analise_saldo_anterior_bem_origem, analise_saldo_anterior_bem_destino], alignment=ft.alignment.center)
+
+    btn_sincronizar_banco = ft.ElevatedButton("Sincronizar", on_click=sincronizar, icon=ft.icons.UPGRADE)
+
     t = ft.Tabs(
-        selected_index=0,
+        selected_index=1,
         animation_duration=300,
+
         tabs=[
             ft.Tab(
                 text="Importador",
                 icon=ft.icons.DOWNLOADING,
                 content=ft.Container(
-                    content=ft.Column([header_frotas, divisor, dados_banco, txt_database,txt_local_arquivos, btn_gerar_arquivos]), alignment=ft.alignment.center,padding=15
-                ),
+                                    content=ft.Column([header_frotas, divisor, dados_banco, txt_database,txt_local_arquivos, btn_gerar_arquivos]),
+                                    alignment=ft.alignment.center,
+                                    padding=15
+                                    ),
             ),
             ft.Tab(
-                text="Config",
-                icon=ft.icons.SETTINGS,
+                text="Analise",
+                icon=ft.icons.MULTILINE_CHART,
                 content=ft.Container(
-                    content=ft.Column([ft.Text("Arquivo de configuração")]), alignment=ft.alignment.center,padding=15
+                                    content=ft.Row([btn_sincronizar_banco,analise_bem,analise_tombamento,analise_saldo_anterior_bem],alignment=ft.alignment.center),
+                                    alignment=ft.alignment.center,
+                                    padding=50,
+                                    border_radius=10,
+                                    bgcolor=ft.colors.GREY_200,
                 ),
             ),
         ],

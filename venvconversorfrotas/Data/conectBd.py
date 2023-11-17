@@ -2,12 +2,12 @@
 import configparser
 import fdb
 
-cfg = configparser.ConfigParser()
-cfg.read('cfg.ini')
 
 class ConectBd:
 
     def connection(self):
+        cfg = configparser.ConfigParser()
+        cfg.read('cfg.ini')
         # String de conexão.
         dsn = f"{cfg['DEFAULT']['Host']}:{cfg['DEFAULT']['NomeBanco']}"
         # Conectando ao banco de dados.
