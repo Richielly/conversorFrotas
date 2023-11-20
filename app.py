@@ -80,11 +80,10 @@ def pages(page: ft.Page):
                 linha_data = file.lines_file(bem_file, linha)
                 bem = bemReader.BemLayoutReader()
                 if bem.run(linha_data, linha):
-                    analise_bem_destino.value = str(int(analise_bem_destino.value) + 1)
+                    analise_bem_convertido.value = str(int(analise_bem_convertido.value) + 1)
                 txt_header.value = f"Arquivo Bem Executando {linha}/{bem_file.shape[0]}"
                 page.update()
             utl.move_file_if_exists(cfg['DEFAULT']['DiretorioArquivos'], core.step['Bem'][3], cfg['DEFAULT']['diretorioarquivosprocessados'])
-
 
         page.add(txt_header)
         file_dir_tombamento_bem = cfg['DEFAULT']['DiretorioArquivos'] + core.step['TombamentoBem'][3]
@@ -95,7 +94,7 @@ def pages(page: ft.Page):
                 linha_data = file.lines_file(tombamento_bem_file, linha)
                 tombamento_bem = tombamento_bemReader.TombamentoBemLayoutReader()
                 if tombamento_bem.run(linha_data, linha):
-                    analise_tombamento_destino.value = str(int(analise_tombamento_destino.value) + 1)
+                    analise_tombamento_convertido.value = str(int(analise_tombamento_convertido.value) + 1)
                 txt_header.value = f"Arquivo Tombamento Bem Executando {linha}/{tombamento_bem_file.shape[0]}"
                 page.update()
             utl.move_file_if_exists(cfg['DEFAULT']['DiretorioArquivos'], core.step['TombamentoBem'][3], cfg['DEFAULT']['diretorioarquivosprocessados'])
@@ -109,7 +108,7 @@ def pages(page: ft.Page):
                 linha_data = file.lines_file(saldo_anterior_bem_file, linha)
                 saldo_anterior_bem = saldo_anterior_bemReader.SaldoAnteriorBemLayoutReader()
                 if saldo_anterior_bem.run(linha_data, linha):
-                    analise_saldo_anterior_bem_destino.value = str(int(analise_saldo_anterior_bem_destino.value) + 1)
+                    analise_saldo_anterior_bem_convertido.value = str(int(analise_saldo_anterior_bem_convertido.value) + 1)
                 txt_header.value = f"Arquivo Saldo Anterior do Bem Executando {linha}/{saldo_anterior_bem_file.shape[0]}"
                 page.update()
             utl.move_file_if_exists(cfg['DEFAULT']['DiretorioArquivos'], core.step['SaldoAnteriorBem'][3], cfg['DEFAULT']['diretorioarquivosprocessados'])
