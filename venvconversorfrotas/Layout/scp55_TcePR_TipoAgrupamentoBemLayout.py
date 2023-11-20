@@ -1,0 +1,18 @@
+from Validations.validationData import ValidationData
+class Scp55_TcePR_TipoAgrupamentoBemLayout:         
+    def table_name(self):
+        return 'SCP55_TCEPR_TIPOAGRUPAMENTOBEM'    
+    def id_table_get(self):
+        return ['IDTIPOAGRUPAMENTOBEM']
+    
+    def table_constraint(self):
+        return ['IDTIPONATUREZABEM', 'IDTIPOCATEGORIABEM', 'IDTPDETALHAMENTOBEM', 'IDTIPOUTILIZACAOBEM'] 
+        
+    def table_foreing_key(self):
+        return {'SCP55_TCEPR_TIPOCATEGORIABEM': ['IDTIPOCATEGORIABEM'], 'SCP55_TCEPR_TIPOMEDIDOR': ['IDTIPOMEDIDOR'], 'SCP55_TCEPR_TIPONATUREZABEM': ['IDTIPONATUREZABEM'], 'SCP55_TCEPR_TIPOUTILIZACAOBEM': ['IDTIPOUTILIZACAOBEM'], 'SCP55_TCEPR_TPDETALHAMENTOBEM': ['IDTPDETALHAMENTOBEM']}
+    
+    def columns_not_null_get(self):
+        return ['IDTIPOAGRUPAMENTOBEM', 'IDTIPONATUREZABEM', 'IDTIPOCATEGORIABEM', 'IDTPDETALHAMENTOBEM', 'IDTIPOUTILIZACAOBEM', 'IDTIPOMEDIDOR', 'FLAGUSACOMBUSTIVEL', 'FLAGEXIGEFIPE', 'FLAGEXIGEPLACA', 'FLAGEXIGERENAVAM', 'FLAGACEITAMOVIMENTO']
+
+    def columns_get(self):
+        return [] 
