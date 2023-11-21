@@ -29,7 +29,7 @@ def pages(page: ft.Page):
 
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_center()
-    page.title = "Importador dos Bens "+ str(entidade) + " V_1.7.1"
+    page.title = "Importador dos Bens "+ str(entidade) + " V_1.8.0"
     progressBar = ft.ProgressBar(width=700, color=ft.colors.GREEN_ACCENT_700)
 
     def sincronizar(e):
