@@ -229,4 +229,4 @@ if __name__ == "__main__":
     ft.app(target=pages)
 
 #  pyinstaller --name Importador_Bem_V_1.0.0 --onefile --icon=bau.ico --noconsole app.py
-# flet pack --name Importador_Bem_V_1.0.0 --icon=bau.ico app.py
+# flet pack --name Importador_Bem_V_1.8.1 --icon=bau.ico app.py
