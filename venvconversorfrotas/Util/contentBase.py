@@ -75,7 +75,8 @@ class ##StepKey##LayoutData:
                 data_dict = None
             return data_dict
         except Exception as e:
-            print(f"Ocorreu um erro ao consultar o banco de dados: {e}")
+            _log.log(f'Ocorreu um erro ao consultar o banco de dados {table_name} : {e}')
+            print(f"Ocorreu um erro ao consultar o banco de dados na tabela {table_name}: {e}")
             return {}
         
     def insert_data(self, values, homologacao=False):
@@ -93,7 +94,8 @@ class ##StepKey##LayoutData:
             else:
                 return "Dado Simulados com sucesso!"
         except Exception as e:
-            return f"Erro ao tentar inserir o dado: {e}"
+            _log.log(f'Erro ao tentar inserir o dado: {table_name}: {e}')
+            return f"Erro ao tentar inserir o dado na tabela {table_name} : {e}"
 
     def save_data(self, table_name, values, line):
         _validation.insert_data(table_name, columns, [values])

@@ -3,7 +3,7 @@ import logging
 from Layout import scp55_TcePR_TipoAgrupamentoBemLayout
 from Core import imports
 from Layout import bemLayout
-from LayoutData import bemLayoutData, scp55_TcePR_TipoAgrupamentoBemLayoutData, fornecedorLayoutData, grupoLayoutData, subGrupoLayoutData, classeLayoutData
+from LayoutData import bemLayoutData, scp55_TcePR_TipoAgrupamentoBemLayoutData, fornecedorLayoutData, grupoLayoutData, subGrupoLayoutData, classeLayoutData, pessoaJuridicaLayoutData
 from Validations import validationData
 
 _entity_bem = bemLayout.BemLayout()
@@ -17,6 +17,7 @@ _entity_grupo_data = grupoLayoutData.GrupoLayoutData()
 _entity_subGrupo_data = subGrupoLayoutData.SubGrupoLayoutData()
 _entity_classe_data = classeLayoutData.ClasseLayoutData()
 _entity_fornecedor_data = fornecedorLayoutData.FornecedorLayoutData()
+_entity_pessoa_juridica_data = pessoaJuridicaLayoutData.PessoaJuridicaLayoutData()
 
 _valid = validationData.ValidationData()
 
@@ -34,6 +35,7 @@ _idtipoutilizacaobem=None
 _nomeGrupo = None
 _nomeSubGrupo = None
 _nomeClasse = None
+_cnpj = None
 
 class BemLayoutReader:
 
@@ -47,6 +49,7 @@ class BemLayoutReader:
         global _nomeGrupo
         global _nomeSubGrupo
         global _nomeClasse
+        global _cnpj
 
         _entity = dict.fromkeys(_entity, None)
 
@@ -78,7 +81,7 @@ class BemLayoutReader:
         _entity['NUMERONOTAFISCAL']=type.to_integer(_column[25])
         _entity['SERIENOTAFISCAL']=type.to_string(_column[26])
         _entity['CODLOTE']=type.to_integer(_column[27])
-        _entity['CODFORNECEDOR']=type.to_integer(_column[28])
+        _cnpj=type.to_string(_column[28])
         _entity['IDLOTE']=type.to_integer(_column[29])
         _entity['INSCRICAOMUNICIPAL']=type.to_string(_column[30])
         _entity['DTINCLUSAOBAIXASIMAM']=type.string_to_date(_column[31])
@@ -99,6 +102,13 @@ class BemLayoutReader:
         if not utl.valid_size(_entity['NOME'], 81):
             log.log(linha, f"O nome do bem {_entity['CODBEM']} entidade {_entity['CODENTIDADE']} deve ter entre 1 e 80 caracteres e esta com tamanho {len(_entity['NOME'])}.", _entity_bem.table_name())
             return False
+
+        if not _entity_pessoa_juridica_data.exist(_entity['CNPJ']):
+            log.log(linha, f"O fornecedor cnpj {_entity['CNPJ']} não existe.", _entity_bem.table_name())
+            return False
+        else:
+            _entity['CODFORNECEDOR'] = _entity_pessoa_juridica_data.exist(_cnpj)['CODPESSOA']
+
         if not _entity_fornecedor_data.exist(_entity['CODFORNECEDOR']):
             log.log(linha, f"O fornecedor código {_entity['CODFORNECEDOR']} não existe.", _entity_bem.table_name())
             return False
@@ -120,12 +130,12 @@ class BemLayoutReader:
             return False
         else:
             _entity['CODCLASSE'] = _entity_classe_data.exist(_entity['CODGRUPO'], _entity['CODSUBGRUPO'], _nomeClasse)['CODCLASSE']
-            
         return True
         
     def save(self):
         _entity['IDBEM'] = _valid.last_id(_entity_bem.table_name())
         _entity['IDTIPOAGRUPAMENTOBEM']=_entity_scp55_TcePR_TipoAgrupamentoBem_data.exist(_idtiponaturezabem, _idtipocategoriabem, _idtpdetalhamentobem, _idtipoutilizacaobem)['IDTIPOAGRUPAMENTOBEM']
+
         if _entity_bem_data.insert_data(_entity):
             return True
         else:False

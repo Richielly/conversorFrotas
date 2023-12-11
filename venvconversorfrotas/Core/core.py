@@ -10,7 +10,8 @@ class Core:
             # 'Modelo' : ['Modelo','modeloLayout','SCF_MODELO', 'modelo.txt'],
             # 'TipoServico' : ['TipoServico','tipoServicoLayout','SCF_TIPOSERVICO', 'TipoServico.txt'],
             # 'Pessoa': ['Pessoa', 'pessoaLayout', 'PESSOA', 'Pessoa.txt'],
-            # 'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
+            'PessoaFisica': ['PessoaFisica', 'pessoaFisicaLayout', 'PESSOAFISICA', 'PessoaFisica.txt'],
+            'PessoaJuridica': ['PessoaJuridica', 'pessoaJuridicaLayout', 'PESSOAJURIDICA', 'PessoaJuridica.txt'],
             # 'Servidor': ['Servidor', 'servidorLayout', 'SERVIDOR','Servidor.txt'],
             # 'Motorista' : ['Motorista','motoristaLayout','SCF_MOTORISTA', 'Motorista.txt'],
             # 'MotoristaCategoriaCnh' : ['MotoristaCategoriaCnh','motoristaCategoriaCnhLayout','SCF_MOTORISTACATCNH', 'MotoristaCategoriaCnh.txt'],
@@ -48,7 +49,6 @@ class Core:
             'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
             'Fornecedor': ['Fornecedor', 'fornecedorLayout', 'Fornecedor', 'Fornecedor.txt'],
             'Scp55_ContaContabil': ['Scp55_ContaContabil', 'scp55_ContaContabilLayout', 'SCP55_CONTACONTABIL', 'ContaContabil.txt'],
-            # 'TombamentoBem': ['TombamentoBem', 'tombamentoBemLayout', 'SCP55_TOMBAMENTOBEM', 'TombamentoBem.txt'],
             'SaldoAnteriorBem': ['SaldoAnteriorBem', 'saldoAnteriorBemLayout', 'SCP55_SALDOANTERIORBEM', 'SaldoAnteriorBem.txt'],
             # '': ['', 'Layout', '', '']
 
